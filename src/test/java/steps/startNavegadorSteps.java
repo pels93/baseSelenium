@@ -9,7 +9,7 @@ public class startNavegadorSteps {
 
     @Given("Encender el navegador")
     public void encender_el_navegador() {
-        System.out.println("iniciando navegador");
+    System.out.println("iniciando navegador");
     }
 
     @When("Ir a {string}")

@@ -5,6 +5,8 @@ import driver.utilsSelectDriver.utilsSelectDriver;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
@@ -19,14 +21,18 @@ public class utilsMobileElements {
 
     private final MobileDriver driver;
     private final String appPackageAndroid;
+    private final AndroidDriver driverAndroid;
+    private final IOSDriver driverIos;
 
-    public utilsMobileElements() {
+    public utilsMobileElements(AndroidDriver driverAndroid, IOSDriver driverIos) {
         this.driver = Appium.driver;
-        appPackageAndroid = driver.getSessionDetails().get("appPackage").toString();
+        this.driverAndroid = driverAndroid;
+        this.driverIos = driverIos;
+        appPackageAndroid = Appium.utilsDriver.getAppPackage();
     }
 
     private String isAndroidPlatform(String texto) {
-        if (Appium.plataforma == Platform.ANDROID) {
+        if (Appium.platform == Platform.ANDROID) {
             texto = this.appPackageAndroid + ":id/" + texto;
         }
         return texto;
@@ -37,12 +43,12 @@ public class utilsMobileElements {
             try {
                 Assert.assertTrue(elements.isDisplayed());
             } catch (Exception e) {
-                utilsSelectDriver.printMsg("WARNING -> NO es visible el elemento " + elements);
+                utilsSelectDriver.printMsg("WARNING -> is NOT Displayed the element " + elements);
             }
             try {
                 Assert.assertTrue(elements.isEnabled());
             } catch (Exception e) {
-                utilsSelectDriver.printMsg("WARNING -> NO es visible el elemento " + elements);
+                utilsSelectDriver.printMsg("WARNING ->  is NOT Enabled the element " + elements);
             }
         } else {
             Assert.assertTrue(elements.isDisplayed());
@@ -52,7 +58,7 @@ public class utilsMobileElements {
 
     public void assertContainText(String textoCompleto, String textoAEncontrar, boolean enableError) {
         try {
-            assert (textoCompleto.toLowerCase().contains(textoAEncontrar));
+            assert (textoCompleto.toLowerCase().contains(textoAEncontrar.toLowerCase()));
         } catch (AssertionError a) {
             String msn = "WARNING -> el texto \n" + textoAEncontrar + "\n no esta en  \n" + textoCompleto;
             if (enableError) {
@@ -86,6 +92,24 @@ public class utilsMobileElements {
             } else {
                 utilsSelectDriver.printMsg(msn);
             }
+        }
+    }
+
+    public void keyboardWrite(MobileElement element, String text) {
+
+        if (Appium.platform == Platform.IOS) {
+            element.sendKeys(text);
+            driverIos.getKeyboard().pressKey(text);
+        } else {
+            driverAndroid.getKeyboard().sendKeys(text);
+        }
+    }
+
+    public void saveHideKeyboard() {
+        if (Appium.platform == Platform.IOS) {
+            driverIos.hideKeyboard();
+        } else {
+            driverAndroid.hideKeyboard();
         }
     }
 
@@ -137,7 +161,7 @@ public class utilsMobileElements {
                 .perform();
     }
 
-    public void longPress(int iniX, int iniY, int milliseconds) {
+    public void longPressPosition(int iniX, int iniY, int milliseconds) {
         TouchAction action = new TouchAction(driver);
         action.press(PointOption.point(iniX, iniY))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(milliseconds)))

@@ -1,5 +1,8 @@
+import driver.utilsSelectDriver.readProperties;
+import driver.utilsSelectDriver.utilsSelectDriver;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -11,11 +14,18 @@ import org.junit.runner.RunWith;
                 "html:target/report_cucumber/html_reports",
                 "json:target/report_cucumber/json-reports/cucumber.json"
         },
-        tags = {"not @web"},
+        //tags = {"not @web"},
         //tags = {"not @mobile"},
         //tags = {"@google"},
         glue = {"steps", "driver"})
 
 public class RunCucumber_Test {
+
+
+    @BeforeClass
+    public static void setup() {
+
+        utilsSelectDriver.fileProperties = new readProperties();
+    }
 
 }

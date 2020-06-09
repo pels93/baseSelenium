@@ -1,8 +1,17 @@
 @echo off
-(echo typeDriver=appium & echo #set selenium & echo browser=edge & echo #set appium & echo mobilePlatform=Android & echo mobileLanguage=ES_fr & echo #set android & echo android_app=test.apk & echo android_mobile=Pixel_2_API_27 & echo android_v_mobile=8.1.0 & echo #set ios & echo iphone_name=iPhone Simulator & echo iphone_v=7.1.0 & echo iphone_app=test.ipa ) > src\test\java\RunCucumber.properties
+adb kill-server
+adb kill-server
+cls
+(echo cucumber.typeDriver=appium&echo urlServerAppium=http://127.0.0.1:4723/wd/hub&echo cucumber.tags=--tags "@mobile"&echo cucumber.mobilePlatform=Android&echo cucumber.mobileLanguage=ES_en&echo cucumber.app=test.apk&echo cucumber.nameMobile=Pixel_2_API_27&echo cucumber.versionMobile=8.1.0&echo cucumber.adbName=emulator-5556&echo #cucumber set&echo cucumber.TypeTest=${cucumber.typeDriver}_${cucumber.app}_${cucumber.nameMobile}&echo cucumber.report=--plugin json:reports/json/${cucumber.TypeTest}/report.json&echo cumcumber.reportHTML=reports/html/${cucumber.TypeTest}/&echo cumcumber.reportJSON=reports/json/${cucumber.TypeTest}/) > src\test\java\RunCucumber.properties
 start %ANDROID_HOME%\tools\emulator.exe -avd Pixel_2_API_27 -no-snapshot -no-snapshot-load -no-snapshot-save -memory 512 -timezone Europe/Paris -no-boot-anim -no-audio -nocache
+start %ANDROID_HOME%\tools\emulator.exe -avd Pixel_2_API_27_2 -no-snapshot -no-snapshot-load -no-snapshot-save -memory 512 -timezone Europe/Paris -no-boot-anim -no-audio -nocache
+ping -n 30 127.0.0.1 >nul
+adb devices
+adb devices
+cls
+start mvn post-integration-test -Dmaven.test.failure.ignore=true
 ping -n 20 127.0.0.1 >nul
-mvn clean test -P mobile
-pause
+(echo cucumber.typeDriver=appium&echo urlServerAppium=http://127.0.0.1:4723/wd/hub&echo cucumber.tags=--tags "@mobile"&echo cucumber.mobilePlatform=Android&echo cucumber.mobileLanguage=ES_en&echo cucumber.app=test.apk&echo cucumber.nameMobile=Pixel_2_API_27_2&echo cucumber.versionMobile=8.1.0&echo cucumber.adbName=emulator-5554&echo #cucumber set&echo cucumber.TypeTest=${cucumber.typeDriver}_${cucumber.app}_${cucumber.nameMobile}&echo cucumber.report=--plugin json:reports/json/${cucumber.TypeTest}/report.json&echo cumcumber.reportHTML=reports/html/${cucumber.TypeTest}/&echo cumcumber.reportJSON=reports/json/${cucumber.TypeTest}/) > src\test\java\RunCucumber.properties
+start mvn post-integration-test -Dmaven.test.failure.ignore=true
 
 

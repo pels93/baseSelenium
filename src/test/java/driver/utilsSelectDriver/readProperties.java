@@ -1,57 +1,35 @@
 package driver.utilsSelectDriver;
 
-import driver.interfacesTypeDriver.TipoDriver;
-import driver.typeDriver.appium.interfacesAppium.mobileIdioma;
+import driver.interfacesTypeDriver.Locate;
+import driver.interfacesTypeDriver.TypeDriver;
+import driver.interfacesTypeDriver.languages;
 import driver.typeDriver.appium.interfacesAppium.typeMobile;
-import driver.typeDriver.selenium.utilsSelenium.interfacesSelenium.Navegadores;
+import driver.typeDriver.selenium.interfacesSelenium.Browsers;
 import org.openqa.selenium.Platform;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
 public class readProperties {
-    String propFileName = "RunCucumber.properties";
-    String rutacompleta = utilsSelectDriver.rutaProyecto() + "/src/test/java/" + propFileName;
-    File initialFile;
-    InputStream inputStream;
-
-
-    // variables file
-    String tipoDriver;
-    String navegador;
-    String mobilePlatform;
-    String mobileLanguage;
-    //android
-    String AndroidNameMobile;
-    String androidVersionMobile;
-    String appAndroid;
-    //ios
-    String iphoneName;
-    String iphoneVersion;
-    String iphoneApp;
-
+    private final String propFileName = "RunCucumber.properties";
+    private final String rutacompleta = utilsSelectDriver.ProjectDirectory() + "/src/test/java/" + propFileName;
+    private File initialFile;
+    private InputStream inputStream;
+    private HashMap<String, String> capabilitiesCucumber;
 
     public readProperties() {
         try {
             Properties prop = new Properties();
+            capabilitiesCucumber = new HashMap<>();
             initialFile = new File(rutacompleta);
             inputStream = new FileInputStream(initialFile);
             prop.load(inputStream);
-            tipoDriver = prop.getProperty("typeDriver").replace(" ", "");
-            navegador = prop.getProperty("browser").replace(" ", "");
-            mobilePlatform = prop.getProperty("mobilePlatform").replace(" ", "");
-            mobileLanguage = prop.getProperty("mobileLanguage").replace(" ", "");
-            //android
-            AndroidNameMobile = prop.getProperty("android_mobile").replace(" ", "");
-            androidVersionMobile = prop.getProperty("android_v_mobile").replace(" ", "");
-            appAndroid = prop.getProperty("android_app").replace(" ", "");
-            //ios
-            iphoneName = prop.getProperty("iphone_name").replace(" ", "");
-            iphoneVersion = prop.getProperty("iphone_v").replace(" ", "");
-            iphoneApp = prop.getProperty("iphone_app").replace(" ", "");
+            for (final String name : prop.stringPropertyNames())
+                capabilitiesCucumber.put(name, prop.getProperty(name).replaceAll("\\s+$", ""));
 
         } catch (Exception ignored) {
 
@@ -60,46 +38,56 @@ public class readProperties {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
+                    utilsSelectDriver.printError("ERROR -> can't close the file " + "\"" + propFileName + "\"\n" + initialFile.toString(), "");
                     e.printStackTrace();
                 }
             } else {
-                utilsSelectDriver.printError("ERROR -> Unable to locate element \"" + propFileName + "\"\n" + initialFile.toString(), "");
+                utilsSelectDriver.printError("ERROR -> Unable to locate the file " + "\"" + propFileName + "\"\n" + initialFile.toString(), "");
             }
         }
     }
 
-    public int getTipoDriver() {
+    public int getTypeDriver() {
         int auxreturn;
-        switch (tipoDriver.toLowerCase()) {
+
+        switch (capabilitiesCucumber.get("cucumber.typeDriver").toLowerCase()) {
             case "appium": {
-                auxreturn = TipoDriver.appium;
+                auxreturn = TypeDriver.appium;
                 break;
             }
             case "selenium": {
-                auxreturn = TipoDriver.selenium;
+                auxreturn = TypeDriver.selenium;
                 break;
             }
             default: {
-                auxreturn = TipoDriver.selenium;
+                auxreturn = TypeDriver.selenium;
             }
         }
 
         return auxreturn;
     }
 
-    public int getBrower() {
+    public int getBrowser() {
         int auxreturn;
-        switch (navegador.toLowerCase()) {
+        switch (capabilitiesCucumber.get("cucumber.typeBrowser").toLowerCase()) {
             case "firefox": {
-                auxreturn = Navegadores.firefox;
+                auxreturn = Browsers.firefox;
                 break;
             }
             case "edge": {
-                auxreturn = Navegadores.edge;
+                auxreturn = Browsers.edge;
+                break;
+            }
+            case "opera": {
+                auxreturn = Browsers.opera;
+                break;
+            }
+            case "safari": {
+                auxreturn = Browsers.safari;
                 break;
             }
             default: {
-                auxreturn = Navegadores.chrome;
+                auxreturn = Browsers.chrome;
             }
         }
 
@@ -108,7 +96,7 @@ public class readProperties {
 
     public Platform getMobilePlatform() {
         Platform auxreturn;
-        switch (mobilePlatform.toLowerCase()) {
+        switch (capabilitiesCucumber.get("cucumber.mobilePlatform").toLowerCase()) {
             case "ios": {
                 auxreturn = typeMobile.ios;
                 break;
@@ -125,69 +113,128 @@ public class readProperties {
     }
 
     public String getAndroidMobileLanguage() {
-        String uax = mobileLanguage.substring(3);
+        String uax = capabilitiesCucumber.get("cucumber.mobileLanguage").substring(3);
         String auxreturn;
         switch (uax) {
-            case mobileIdioma.fr: {
-                auxreturn = mobileIdioma.fr;
+            case languages.french: {
+                auxreturn = languages.french;
                 break;
             }
-            case mobileIdioma.en: {
-                auxreturn = mobileIdioma.en;
+            case languages.english: {
+                auxreturn = languages.english;
+                break;
+            }
+            case languages.italian: {
+                auxreturn = languages.italian;
+                break;
+            }
+            case languages.chinese: {
+                auxreturn = languages.chinese;
+                break;
+            }
+            case languages.japan: {
+                auxreturn = languages.japan;
+                break;
+            }
+            case languages.portuguese: {
+                auxreturn = languages.portuguese;
+                break;
+            }
+            case languages.german: {
+                auxreturn = languages.german;
                 break;
             }
             default: {
-                auxreturn = mobileIdioma.es;
+                auxreturn = languages.spain;
+            }
+        }
+        return auxreturn;
+    }
+
+    public String getAndroidMobileLocate() {
+        String uax = capabilitiesCucumber.get("cucumber.mobileLanguage").substring(0, 2);
+        String auxreturn;
+        switch (uax) {
+            case Locate.Frence: {
+                auxreturn = Locate.Frence;
+                break;
+            }
+            case Locate.England: {
+                auxreturn = Locate.England;
+                break;
+            }
+            case Locate.Italy: {
+                auxreturn = Locate.Italy;
+                break;
+            }
+            case Locate.HongKong: {
+                auxreturn = Locate.HongKong;
+                break;
+            }
+            case Locate.Portugal: {
+                auxreturn = Locate.Portugal;
+                break;
+            }
+            case Locate.Brazil: {
+                auxreturn = Locate.Brazil;
+                break;
+            }
+            case Locate.Belgica: {
+                auxreturn = Locate.Belgica;
+                break;
+            }
+            case Locate.Japan: {
+                auxreturn = Locate.Japan;
+                break;
+            }
+            default: {
+                auxreturn = Locate.Spain;
             }
         }
         return auxreturn;
     }
 
     public String getIphoneMobileLanguageLocate() {
-        return mobileLanguage;
+        return getAndroidMobileLanguage() + "_" + getAndroidMobileLocate();
     }
 
-    public String getAndroidMobileLocate() {
-        String uax = mobileLanguage.substring(0, 2);
-        String auxreturn;
-        switch (uax) {
-            case "FR": {
-                auxreturn = mobileIdioma.fr.toUpperCase();
-                break;
+    public String getUrl() {
+        String aux;
+
+        try {
+            aux = capabilitiesCucumber.get("urlServerAppium");
+            if (aux.isEmpty()) {
+                aux = "http://127.0.0.1:4723/wd/hub";
             }
-            case "EN": {
-                auxreturn = mobileIdioma.en.toUpperCase();
-                break;
-            }
-            default: {
-                auxreturn = mobileIdioma.es.toUpperCase();
-            }
+        } catch (Exception ignored) {
+            aux = "http://127.0.0.1:4723/wd/hub";
         }
-        return auxreturn;
+        return aux;
     }
 
-    public String getAndroidApp() {
-        return appAndroid;
+    public String getApp() {
+        return capabilitiesCucumber.get("cucumber.app");
     }
 
-    public String getAndroidVersionMobile() {
-        return androidVersionMobile;
+    public String getVersionMobile() {
+        return capabilitiesCucumber.get("cucumber.versionMobile");
     }
 
-    public String getAndroidNameMobile() {
-        return AndroidNameMobile;
+    public String getNameMobile() {
+        return capabilitiesCucumber.get("cucumber.nameMobile");
     }
 
-    public String getIphoneApp() {
-        return iphoneApp;
+    public String getUdidMobile() {
+        return capabilitiesCucumber.get("cucumber.adbName");
     }
 
-    public String getIphoneName() {
-        return iphoneName;
-    }
-
-    public String getIphoneVersion() {
-        return iphoneVersion;
+    public Boolean getEnableDeleteOldDrivers() {
+        String aux = capabilitiesCucumber.get("cucumber.enableDeleteOldDrivers");
+        boolean result = false;
+        if (aux.toLowerCase().contains("t")) {
+            result = true;
+        }
+        return result;
     }
 
 }

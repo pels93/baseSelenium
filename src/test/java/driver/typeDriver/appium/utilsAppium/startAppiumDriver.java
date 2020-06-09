@@ -1,13 +1,11 @@
 package driver.typeDriver.appium.utilsAppium;
 
-import driver.typeDriver.appium.Appium;
 import driver.utilsSelectDriver.readProperties;
 import driver.utilsSelectDriver.utilsSelectDriver;
-import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -17,52 +15,46 @@ import java.net.URL;
 public class startAppiumDriver {
 
     private static URL urlServerAppium = null;
-    private final String url = "http://127.0.0.1:4723/wd/hub";
     private static final String rutaApps = "/src/test/resources/apps_appium/";
-    private static final String rutaCompleta = utilsSelectDriver.rutaProyecto() + rutaApps;
+    private static final String fullDirectory = utilsSelectDriver.ProjectDirectory() + rutaApps;
 
-    public startAppiumDriver() {
+    public startAppiumDriver(readProperties fileProperties) {
+        utilsSelectDriver.manageDirectory(fullDirectory, 0);
+        setURL(fileProperties);
+    }
 
+    public AndroidDriver android(readProperties fileProperties) {
+        String myApp = fullDirectory + fileProperties.getApp();
+        DesiredCapabilities caps = DesiredCapabilities.android();
+        caps.setCapability(MobileCapabilityType.APP, myApp);
+        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, fileProperties.getNameMobile());
+        caps.setCapability(MobileCapabilityType.UDID, fileProperties.getUdidMobile());
+        caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, fileProperties.getVersionMobile());
+        caps.setCapability(MobileCapabilityType.LANGUAGE, fileProperties.getAndroidMobileLanguage());
+        caps.setCapability(MobileCapabilityType.LOCALE, fileProperties.getAndroidMobileLocate());
+        caps.setCapability(AndroidMobileCapabilityType.DEVICE_READY_TIMEOUT, 60);
+        caps.setCapability(AndroidMobileCapabilityType.ANDROID_INSTALL_TIMEOUT, 90000);
+        return new AndroidDriver(urlServerAppium, caps);
+    }
+
+    public IOSDriver ios(readProperties fileProperties) {
+        String myApp = fullDirectory + fileProperties.getApp();
+        DesiredCapabilities caps = DesiredCapabilities.iphone();
+        caps.setCapability(MobileCapabilityType.APP, myApp);
+        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, fileProperties.getNameMobile());
+        caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, fileProperties.getVersionMobile());
+        caps.setCapability(MobileCapabilityType.LANGUAGE, fileProperties.getAndroidMobileLanguage());
+        caps.setCapability(MobileCapabilityType.LOCALE, fileProperties.getIphoneMobileLanguageLocate());
+        return new IOSDriver(urlServerAppium, caps);
+    }
+
+    private void setURL(readProperties fileProperties) {
         try {
-            urlServerAppium = new URL(url);
+            urlServerAppium = new URL(fileProperties.getUrl());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
-
-    public MobileDriver initTypePlatorm(readProperties fileProperties) {
-        Platform tipo = Appium.plataforma;
-        MobileDriver driver = null;
-        switch (tipo) {
-            case ANDROID: {
-                String myApp = rutaCompleta + fileProperties.getAndroidApp();
-                DesiredCapabilities caps = DesiredCapabilities.android();
-                caps.setCapability(MobileCapabilityType.APP, myApp);
-                caps.setCapability("platformName", "Android");
-                caps.setCapability(MobileCapabilityType.DEVICE_NAME, fileProperties.getAndroidNameMobile());
-                caps.setCapability("VERSION", fileProperties.getAndroidVersionMobile());
-                caps.setCapability("language", Appium.language);
-                caps.setCapability("locale", fileProperties.getAndroidMobileLocate());
-                driver = new AndroidDriver(urlServerAppium, caps);
-                break;
-            }
-
-            case IOS: {
-                String myApp = rutaCompleta + fileProperties.getIphoneApp();
-                DesiredCapabilities caps = DesiredCapabilities.iphone();
-                caps.setCapability(MobileCapabilityType.APP, myApp);
-                caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-                caps.setCapability(MobileCapabilityType.DEVICE_NAME, fileProperties.getIphoneName());
-                caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, fileProperties.getIphoneVersion());
-                caps.setCapability("language", Appium.language);
-                caps.setCapability("locale", fileProperties.getIphoneMobileLanguageLocate());
-                driver = new IOSDriver(urlServerAppium, caps);
-                break;
-            }
-        }
-
-        return driver;
-    }
-
-
 }

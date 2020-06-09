@@ -1,7 +1,7 @@
 package steps;
 
 import driver.typeDriver.selenium.Selenium;
-import driver.typeDriver.selenium.utilsSelenium.interfacesSelenium.Navegadores;
+import driver.typeDriver.selenium.interfacesSelenium.Browsers;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebElement;
@@ -35,7 +35,7 @@ public class amazonSteps {
     public void seleccionarElPrimerResultado() {
         Selenium.utilsDriver.sleep(1);
         List<WebElement> resultados;
-        if (Selenium.navegador != Navegadores.firefox) {
+        if (Selenium.browser != Browsers.firefox) {
             amazonSearchResultPage result = new amazonSearchResultPage();
             resultados = result.resultados;
         } else {

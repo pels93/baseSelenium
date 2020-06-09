@@ -7,10 +7,12 @@ import java.util.List;
 
 public class calculadoraPage {
 
-    public MobileElement punto = Appium.utilsMobileElements.findElementByIdOrXpath("period", "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout[2]/android.widget.ImageView[25]");
-    public MobileElement backspace = Appium.utilsMobileElements.findElementById("backspace");
+    public MobileElement punto = Appium.utilsMobileElements.findElementByIdOrXpath("period",
+            "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout[2]/android.widget.ImageView[25]");
+    public List<MobileElement> auxpunto = Appium.utilsMobileElements.findElementsById("period");
     public MobileElement AC = Appium.utilsMobileElements.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout[2]/android.widget.ImageView[8]");
-    public MobileElement clear = null;
+    public List<MobileElement> C = Appium.utilsMobileElements.findElementsById("clear");
+    public MobileElement clear = Appium.utilsMobileElements.findElementById("backspace");
     public MobileElement num0 = Appium.utilsMobileElements.findElementById("n0");
     public MobileElement num1 = Appium.utilsMobileElements.findElementById("n1");
     public MobileElement num2 = Appium.utilsMobileElements.findElementById("n2");
@@ -37,10 +39,6 @@ public class calculadoraPage {
     public void findResult() {
         lista = Appium.utilsMobileElements.findElementsByXPath("*//android.widget.ListView/android.widget.LinearLayout");
         result = Appium.utilsMobileElements.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[1]/android.widget.RelativeLayout/android.widget.TextView");
-
     }
 
-
 }
-
-

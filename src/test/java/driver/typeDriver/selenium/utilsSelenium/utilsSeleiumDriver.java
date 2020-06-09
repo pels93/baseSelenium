@@ -1,7 +1,7 @@
 package driver.typeDriver.selenium.utilsSelenium;
 
 import driver.typeDriver.selenium.Selenium;
-import driver.typeDriver.selenium.utilsSelenium.interfacesSelenium.tamanoVentana;
+import driver.typeDriver.selenium.interfacesSelenium.WindowsSize;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -18,15 +18,13 @@ public class utilsSeleiumDriver {
 
     public void setWindowsSize(int tipo, int ancho, int alto) {
         switch (tipo) {
-            case tamanoVentana.oculto: // oculto
+            case WindowsSize.oculto: // oculto
             {
-                if (ancho == 0) {
-                    ancho = -2000;
-                }
+                ancho = -2000;
                 driver.manage().window().setPosition(new Point(ancho, alto));
                 break;
             }
-            case tamanoVentana.dimensionado: // dimensionado
+            case WindowsSize.dimensionado: // dimensionado
             {
                 if (ancho == 0) {
                     ancho = 400;
@@ -68,10 +66,15 @@ public class utilsSeleiumDriver {
     public void saveScreenshotsForScenario(final Scenario scenario) {
         final byte[] screenshot = ((TakesScreenshot) driver)
                 .getScreenshotAs(OutputType.BYTES);
-        /* nuevo */
         scenario.attach(screenshot, "image/png", "attachment");
-        /* deprecation */
-        ///scenario.embed(screenshot, "image/png");
+    }
+
+    public void goToBack() {
+        driver.navigate().back();
+    }
+
+    public void goToNext() {
+        driver.navigate().back();
     }
 
     public void quit() {

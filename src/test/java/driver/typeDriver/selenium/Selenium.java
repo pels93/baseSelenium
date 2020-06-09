@@ -1,6 +1,6 @@
 package driver.typeDriver.selenium;
 
-import driver.typeDriver.selenium.utilsSelenium.interfacesSelenium.tamanoVentana;
+import driver.typeDriver.selenium.interfacesSelenium.WindowsSize;
 import driver.typeDriver.selenium.utilsSelenium.startSeleniumDriverBrowser;
 import driver.typeDriver.selenium.utilsSelenium.utilsSeleiumDriver;
 import driver.typeDriver.selenium.utilsSelenium.utilsWebElements;
@@ -12,21 +12,24 @@ public class Selenium {
     public static WebDriver driver;
     public static utilsSeleiumDriver utilsDriver;
     public static utilsWebElements utilsWebElements;
-    public static int navegador;
+    public static int browser;
 
     public Selenium(readProperties fileProperties) {
-        navegador = fileProperties.getBrower();
-        startSeleniumDriverBrowser startBrowser = new startSeleniumDriverBrowser();
-        driver = startBrowser.selectBrowser();
+        browser = fileProperties.getBrowser();
+        startBrowser(fileProperties);
         if (driver != null) {
             utilsDriver = new utilsSeleiumDriver();
             utilsWebElements = new utilsWebElements();
             utilsDriver.deleteCookies();
-            utilsDriver.setWindowsSize(tamanoVentana.maximizado, 0, 0);
+            utilsDriver.setWindowsSize(WindowsSize.maximizado, 0, 0);
             utilsDriver.waiter(30000);
         }
     }
 
+    private void startBrowser(readProperties fileProperties) {
+        startSeleniumDriverBrowser startBrowser = new startSeleniumDriverBrowser();
+        driver = startBrowser.selectBrowser(fileProperties.getEnableDeleteOldDrivers());
+    }
 }
 
 

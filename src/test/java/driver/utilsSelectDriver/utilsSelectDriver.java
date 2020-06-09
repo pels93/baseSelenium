@@ -1,61 +1,58 @@
 package driver.utilsSelectDriver;
 
 
-import driver.interfacesTypeDriver.TipoDriver;
+import driver.interfacesTypeDriver.TypeDriver;
+import driver.interfacesTypeDriver.TypeTime;
 import driver.typeDriver.appium.Appium;
 import driver.typeDriver.selenium.Selenium;
 import io.cucumber.java.Scenario;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class utilsSelectDriver {
 
-    protected final int tipoDriver;
+    private final int tipoDriver;
+    public static readProperties fileProperties;
 
     public utilsSelectDriver() {
-        readProperties fileProperties = new readProperties();
-        tipoDriver = fileProperties.getTipoDriver();
+        //reading in RunCumcumber
+        tipoDriver = fileProperties.getTypeDriver();
 
         switch (tipoDriver) {
-            case TipoDriver.appium: {
+            case TypeDriver.appium: {
                 selectAppium(fileProperties);
                 break;
             }
-            case TipoDriver.selenium: {
+            case TypeDriver.selenium: {
                 selectSelenium(fileProperties);
                 break;
             }
         }
     }
 
-    @SuppressWarnings("InstantiationOfUtilityClass")
     private void selectSelenium(readProperties fileProperties) {
         Selenium selenium = new Selenium(fileProperties);
     }
 
-    @SuppressWarnings("InstantiationOfUtilityClass")
     private void selectAppium(readProperties fileProperties) {
         Appium appium = new Appium(fileProperties);
-    }
-
-    private void deleteOldReport() {
-        String rutaReports = "/target/report_cucumber/";
-        String rutaProyecto = rutaProyecto();
-        String rutaCompleta = rutaProyecto + rutaReports;
     }
 
     public void ScenarioFailed(Scenario scenario) {
         if (scenario.isFailed()) {
             switch (tipoDriver) {
-                case 0: //movil
-                {
+                case TypeDriver.appium: {
                     Appium.utilsDriver.saveScreenshotsForScenario(scenario);
                     break;
                 }
-                case 1: // web
-                {
+                case TypeDriver.selenium: {
                     Selenium.utilsDriver.saveScreenshotsForScenario(scenario);
                     break;
                 }
@@ -78,34 +75,45 @@ public class utilsSelectDriver {
         }
     }
 
-    public static String rutaProyecto() {
-        String rutaProyecto = null;
+    public static String ProjectDirectory() {
+        String ProjectDirectory = null;
         try {
-            rutaProyecto = new File(".").getCanonicalPath();
+            ProjectDirectory = new File(".").getCanonicalPath();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return rutaProyecto;
+        return ProjectDirectory;
     }
 
-    public static void deleteDirectory(String rutaCompleta) {
-        File f = new File(rutaCompleta);
-        if (f.delete())
-            printMsg("The directory " + f.toString() + " has been deleted");
-        else
-            printMsg("The directory " + f.toString() + " not has been deleted");
-    }
-
-    public static void createDirectory(String rutaCompleta) {
-        File f = new File(rutaCompleta);
-        if (!f.exists()) {
-            if (f.mkdir()) {
-                printMsg("The directory \n" + f.toString() + "\n has been created");
-            } else {
-                printMsg("The directory \n" + f.toString() + "\n not has been created");
+    public static void manageDirectory(String fullDirectory, int mode) {
+        File directory = new File(fullDirectory);
+        switch (mode) {
+            case 0: //create directory
+            default: {
+                if (!directory.exists()) {
+                    if (directory.mkdir()) {
+                        printMsg("The directory \n" + directory.toString() + "\n has been created");
+                    } else {
+                        printMsg("The directory \n" + directory.toString() + "\n not has been created");
+                    }
+                }
+                break;
             }
+            case 1: { //delete directory
+                if (directory.exists()) {
+                    try {
+                        FileUtils.deleteDirectory(directory);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            }
+
         }
+
     }
+
 
     public static void printError(String headerErrorText, String bodyErrorText) {
         throw new NullPointerException(
@@ -116,10 +124,67 @@ public class utilsSelectDriver {
         );
     }
 
-    public static void printMsg(String texto) {
+    public static void printMsg(String text) {
         System.out.println("================================================");
-        System.out.println(texto);
+        System.out.println(text);
         System.out.println("================================================");
     }
+
+    public static Integer getTimeSystem(int selectTypeTime) {
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj;
+        switch (selectTypeTime) {
+            case TypeTime.days: {
+                myFormatObj = DateTimeFormatter.ofPattern("dd");
+                break;
+            }
+            case TypeTime.mouht: {
+                myFormatObj = DateTimeFormatter.ofPattern("MM");
+                break;
+            }
+            case TypeTime.years: {
+                myFormatObj = DateTimeFormatter.ofPattern("yyyy");
+                break;
+            }
+            case TypeTime.hours: {
+                myFormatObj = DateTimeFormatter.ofPattern("HH");
+                break;
+            }
+            case TypeTime.minutes: {
+                myFormatObj = DateTimeFormatter.ofPattern("mm");
+                break;
+            }
+            default: {
+                myFormatObj = DateTimeFormatter.ofPattern("ss");
+                break;
+            }
+        }
+
+        String formattedDate = myDateObj.format(myFormatObj);
+        return Integer.valueOf(formattedDate);
+
+    }
+
+    public static int compareTime(int day1, int mouht1, int year1, int day2, int mouht2, int year2) {
+        Date date1 = null;
+        Date date2 = null;
+        int aux = 0;
+        try {
+            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(day1 + "/" + mouht1 + "/" + year1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            date2 = new SimpleDateFormat("dd/MM/yyyy").parse(day2 + "/" + mouht2 + "/" + year2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date1 != null) {
+            aux = date1.compareTo(date2);
+        }
+        return aux;
+    }
+
 }
 

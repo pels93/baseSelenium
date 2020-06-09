@@ -6,21 +6,18 @@ h3, h4, h5 {
     color: white;
 }
 
-#img_provedor {
-    background: url('https://www.sogeti.es/Static/img/sogeti-logo.svg') right no-repeat;
-    float: right;
+.h3, h3 {
+    height: 60px;
 }
 
-#img_cliente {
-    background: url('https://www.openbank.es/assets/logo_topbar/logo_lazo_negro.svg') center no-repeat;
-    float: left;
-}
-
-#img_cliente, #img_provedor {
-    width: 200px;
-    padding: 30px;
-}
-
-#logoscompanies {
+.h5, h5 {
     height: 70px;
+}
+
+
+div.pb-2.mt-4.mb-2.border-bottom {
+    background-image: url('http://www.federico-toledo.com/wp-content/uploads/2017/07/MobileDevTest_Blog-300x129.jpg'), url('https://www.selenium.dev/images/selenium_logo_large.png');
+    background-position: right top, left top;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 200px 60px, 300px 60px;
 }

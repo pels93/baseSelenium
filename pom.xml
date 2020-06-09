@@ -26,10 +26,10 @@
                 </executions>
                 <configuration>
                     <customPageTitle>Report baseSelenium</customPageTitle>
-                    <sourceJsonReportDirectory>${project.build.directory}/report_cucumber/json-reports/
-                    </sourceJsonReportDirectory>
-                    <generatedHtmlReportDirectory>${project.build.directory}/report_cucumber/html-prety-reports/
-                    </generatedHtmlReportDirectory>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <sourceJsonReportDirectory>${cumcumber.reportJSON}</sourceJsonReportDirectory>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <generatedHtmlReportDirectory>${cumcumber.reportHTML}</generatedHtmlReportDirectory>
                     <customParametersFile>
                         ${project.build.testSourceDirectory}/properties_html_beutiful/customParameters.properties
                     </customParametersFile>
@@ -51,7 +51,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
-                        <cucumber.options>${cucumber.options}</cucumber.options>
+                        <cucumber.options>${cucumber.tags}${cucumber.report}</cucumber.options>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -64,6 +64,26 @@
                 </configuration>
             </plugin>
             <!--end run maven-->
+            <!-- maven read properties-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${project.build.testSourceDirectory}/RunCucumber.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--end maven read properties-->
         </plugins>
     </build>
     <dependencies>
@@ -78,6 +98,12 @@
             <artifactId>cucumber-junit</artifactId>
             <version>5.7.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
         <!--end cucumber-->
         <!--selenium-->
         <dependency>
@@ -89,6 +115,16 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-opera-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-safari-driver</artifactId>
             <version>3.141.59</version>
         </dependency>
         <dependency>
@@ -132,20 +168,4 @@
         </dependency>
         <!--end junit-->
     </dependencies>
-    <!--profiles maven-->
-    <profiles>
-        <profile>
-            <id>mobile</id>
-            <properties>
-                <cucumber.options>--tags "@mobile"</cucumber.options>
-            </properties>
-        </profile>
-        <profile>
-            <id>internet</id>
-            <properties>
-                <cucumber.options>--tags "@web"</cucumber.options>
-            </properties>
-        </profile>
-    </profiles>
-    <!--end profiles maven-->
 </project>

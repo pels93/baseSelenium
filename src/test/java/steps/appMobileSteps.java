@@ -1,7 +1,8 @@
 package steps;
 
+import driver.interfacesTypeDriver.TypeTime;
 import driver.typeDriver.appium.Appium;
-import driver.typeDriver.appium.interfacesAppium.mobileIdioma;
+import driver.utilsSelectDriver.utilsSelectDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -22,20 +23,42 @@ public class appMobileSteps {
         calculadora = new calculadoraPage();
     }
 
+    @And("Comprobar fecha")
+    public void comprobarFecha() {
+        int auxCompareDate = utilsSelectDriver.compareTime(Appium.utilsDriver.getTimeDevice(TypeTime.days),
+                Appium.utilsDriver.getTimeDevice(TypeTime.mouht),
+                Appium.utilsDriver.getTimeDevice(TypeTime.years),
+                utilsSelectDriver.getTimeSystem(TypeTime.days),
+                utilsSelectDriver.getTimeSystem(TypeTime.mouht),
+                utilsSelectDriver.getTimeSystem(TypeTime.years));
+        assert (auxCompareDate == 0);
+    }
+
+    @When("comprobar todos los botones")
+    public void comprobarTodosLosBotones() {
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.punto, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.igual, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.suma, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.resta, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.multiplicacion, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.division, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.clear, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.AC, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.clear, false);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num0, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num1, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num2, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num3, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num4, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num5, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num6, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num7, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num8, true);
+        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num9, true);
+    }
+
     @When("Cuando presione el numero {string}")
     public void cuandoPresioneElNumeroNumero(String arg0) {
-
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.punto, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num0, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num1, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num2, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num3, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num4, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num5, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num6, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num7, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num8, false);
-        Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num9, false);
 
         for (int c = 0; c < arg0.length(); c++) {
             String aux = String.valueOf(arg0.charAt(c));
@@ -117,18 +140,38 @@ public class appMobileSteps {
     }
 
     @Then("El resultado tiene que ser {string}")
-    public void elResutladoTieneQueSerResultado(String arg0) {
+    public void elResutladoTieneQueSer(String arg0) {
         Appium.utilsMobileElements.longPressElement(calculadora.pantalla, 2000);
         calculadora.findResult();
         String textResult = calculadora.result.getText();
         String aux;
-        if (mobileIdioma.en.equals(Appium.driver.getSessionDetails().get("language").toString())) {
-            aux = textResult.substring(textResult.indexOf('\"') + 1, textResult.length() - 1);
+        //get number
+        if (textResult.contains("\"")) {
+            aux = textResult.substring(textResult.indexOf('\"') + 1, textResult.lastIndexOf('\"'));
         } else {
-            aux = textResult.substring(textResult.indexOf('(') + 1, textResult.length() - 1);
+            aux = textResult.substring(textResult.indexOf('(') + 1, textResult.lastIndexOf(')'));
         }
+
+        if (calculadora.auxpunto.isEmpty()) {
+            aux = aux.replace(".", "");
+        } else {
+            aux = aux.replace(",", "");
+        }
+
         Appium.utilsMobileElements.assertEqualsTextToDouble(aux, arg0, true);
     }
 
+    @When("Cuando presione el numero {string} por teclado")
+    public void cuandoPresioneElNumeroNumeroPorTeclado(String arg0) {
 
+        String auxArg0 = arg0;
+        if (calculadora.auxpunto.isEmpty()) {
+            if (auxArg0.contains("."))
+                auxArg0 = auxArg0.replace(".", ",");
+        } else {
+            if (auxArg0.contains(","))
+                auxArg0 = auxArg0.replace(",", ".");
+        }
+        Appium.utilsMobileElements.keyboardWrite(null, auxArg0);
+    }
 }

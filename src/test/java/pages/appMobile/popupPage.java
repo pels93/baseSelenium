@@ -6,5 +6,5 @@ import io.appium.java_client.MobileElement;
 import java.util.List;
 
 public class popupPage {
-    public List<MobileElement> el1 = Appium.utilsMobileElements.findElementsById("consent_dialog_no_button");
+  public List<MobileElement> el1 = Appium.utilsMobileElements.findElementsById("consent_dialog_no_button");
 }
