@@ -1,0 +1,26 @@
+body {
+    background-color: black;
+}
+
+h3, h4, h5 {
+    color: white;
+}
+
+#img_provedor {
+    background: url('https://www.sogeti.es/Static/img/sogeti-logo.svg') right no-repeat;
+    float: right;
+}
+
+#img_cliente {
+    background: url('https://www.openbank.es/assets/logo_topbar/logo_lazo_negro.svg') center no-repeat;
+    float: left;
+}
+
+#img_cliente, #img_provedor {
+    width: 200px;
+    padding: 30px;
+}
+
+#logoscompanies {
+    height: 70px;
+}

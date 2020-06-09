@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  https://mvnrepository.com/  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>starfriend.es</groupId>
+    <artifactId>baseSelenium</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <!--beutiful report-->
+            <!-- https://github.com/trivago/cluecumber-report-plugin -->
+            <plugin>
+                <groupId>com.trivago.rta</groupId>
+                <artifactId>cluecumber-report-plugin</artifactId>
+                <version>2.5.0</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>reporting</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <customPageTitle>Report baseSelenium</customPageTitle>
+                    <sourceJsonReportDirectory>${project.build.directory}/report_cucumber/json-reports/
+                    </sourceJsonReportDirectory>
+                    <generatedHtmlReportDirectory>${project.build.directory}/report_cucumber/html-prety-reports/
+                    </generatedHtmlReportDirectory>
+                    <customParametersFile>
+                        ${project.build.testSourceDirectory}/properties_html_beutiful/customParameters.properties
+                    </customParametersFile>
+                    <customCss>${project.build.testSourceDirectory}/properties_html_beutiful/custom.css</customCss>
+                    <!--enable see ScreenShot-->
+                    <expandBeforeAfterHooks>true</expandBeforeAfterHooks>
+                    <expandStepHooks>true</expandStepHooks>
+                    <expandDocStrings>true</expandDocStrings>
+                    <!--end enable see ScreenShot-->
+                </configuration>
+            </plugin>
+            <!--end beutiful report-->
+
+            <!--run maven-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <cucumber.options>${cucumber.options}</cucumber.options>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <!--end run maven-->
+        </plugins>
+    </build>
+    <dependencies>
+        <!--cucumber-->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <!--end cucumber-->
+        <!--selenium-->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-edge-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>3.141.59</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--end selenium-->
+        <!--update drivers selenium-->
+        <!-- https://github.com/bonigarcia/webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!--end update drivers selenium-->
+        <!--appium-->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>7.3.0</version>
+        </dependency>
+        <!--end appium-->
+        <!--junit-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <!--end junit-->
+    </dependencies>
+    <!--profiles maven-->
+    <profiles>
+        <profile>
+            <id>mobile</id>
+            <properties>
+                <cucumber.options>--tags "@mobile"</cucumber.options>
+            </properties>
+        </profile>
+        <profile>
+            <id>internet</id>
+            <properties>
+                <cucumber.options>--tags "@web"</cucumber.options>
+            </properties>
+        </profile>
+    </profiles>
+    <!--end profiles maven-->
+</project>
