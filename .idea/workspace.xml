@@ -16,7 +16,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39db7db8-ee4f-4bbd-b637-e812c82804a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/set_variables_android.bat" beforeDir="false" afterPath="$PROJECT_DIR$/set_variables_android.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/RunCucumber.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/RunCucumber.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +57,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="D:/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -118,14 +121,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589298541219</updated>
-      <workItem from="1591726119548" duration="318000" />
-    </task>
-    <task id="LOCAL-00089" summary="refactor appium">
-      <created>1591262476757</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1591262476757</updated>
+      <workItem from="1591726119548" duration="760000" />
+      <workItem from="1591726901235" duration="1590000" />
+      <workItem from="1591728518460" duration="418000" />
     </task>
     <task id="LOCAL-00090" summary="update readProperties">
       <created>1591263351032</created>
@@ -463,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591726242743</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="refactor">
+      <created>1591726446656</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1591726446656</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -524,10 +529,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="339" y="0" width="617" height="680" key="#Feature:_starfriend/0.0.1280.680@0.0.1280.680" timestamp="1589811278666" />
-    <state x="121" y="0" key="#Project_Structure" timestamp="1590401112445">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="129" y="0" key="#Project_Structure" timestamp="1591727030321">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="121" y="0" key="#Project_Structure/0.0.1280.680@0.0.1280.680" timestamp="1590401112445" />
+    <state x="129" y="0" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1591727030321" />
     <state x="243" y="0" key="#RunCucumber" timestamp="1590070539631">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -601,11 +607,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="389" y="185" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1280.680@0.0.1280.680" timestamp="1591008516268" />
-    <state x="404" y="0" key="CommitChangelistDialog2" timestamp="1591726241023">
+    <state x="404" y="0" key="CommitChangelistDialog2" timestamp="1591726445742">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="379" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1591714543419" />
-    <state x="404" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1591726241023" />
+    <state x="404" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1591726445742" />
     <state width="447" height="412" key="DebuggerActiveHint" timestamp="1591711039335">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -676,11 +682,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="240" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1590992255449" />
-    <state x="249" y="79" key="Vcs.Push.Dialog.v2" timestamp="1591726406975">
+    <state x="249" y="79" key="Vcs.Push.Dialog.v2" timestamp="1591726453992">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1590132670638" />
-    <state x="249" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591726406975" />
+    <state x="249" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591726453992" />
     <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1591711693306">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

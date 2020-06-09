@@ -1,19 +1,22 @@
 @echo off
 echo add como variable
-echo setx /M ANDROID_HOME "%LOCALAPPDATA%\Android\Sdk"
-echo setx /M ANDROID_SDK_HOME "%HOMEPATH%\.android"
-echo setx /M ANDROID_AVD_HOME "%HOMEPATH%\.android\avd"
-echo setx /M M2_HOME "%ProgramFiles%\apache-maven-3.6.3"
+setx /M ANDROID_HOME "%LOCALAPPDATA%\Android\Sdk"
+setx /M ANDROID_SDK_HOME "%HOMEPATH%\.android"
+setx /M ANDROID_AVD_HOME "%HOMEPATH%\.android\avd"
+setx /M M2_HOME "%ProgramFiles%\apache-maven-3.6.3"
+setx /M JAVA_HOME "%ProgramFiles%\Java\jdk1.8.0_60"
 pause
 echo add a path
-echo %JAVA_HOME%\bin
-echo %M2_HOME%\bin
-echo %ANDROID_HOME%\platforms
-echo %ANDROID_HOME%\platform-tools
-echo %ANDROID_HOME%\tools
-echo %ANDROID_HOME%\tools\bin
+SETX /M PATH "%PATH%;%M2_HOME%\bin"
+SETX /M PATH "%PATH%;%JAVA_HOME%\bin"
+SETX /M PATH "%PATH%;%ANDROID_HOME%\platforms"
+SETX /M PATH "%PATH%;%ANDROID_HOME%\platform-tools"
+SETX /M PATH "%PATH%;%ANDROID_HOME%\tools"
+SETX /M PATH "%PATH%;%ANDROID_HOME%\tools\bin"
+echo revisa los parametros
 pause
-
-adb
-emulator
-avdmanager list avd
+echo ejecuta los siguientes comandos en un nuevo terminal
+start
+echo adb
+echo emulator
+echo avdmanager list avd
