@@ -3,7 +3,6 @@ package steps;
 import driver.typeDriver.selenium.Selenium;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.Keys;
 
 public class startNavegadorSteps {
 
@@ -12,9 +11,8 @@ public class startNavegadorSteps {
     System.out.println("iniciando navegador");
     }
 
-    @When("Ir a {string}")
+    @When("El navegador introduce la URL {string}")
     public void irA(String url) {
         Selenium.driver.get(url);
-        Selenium.utilsDriver.sendKeys(Keys.ALT);
     }
 }

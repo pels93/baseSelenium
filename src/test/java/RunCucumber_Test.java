@@ -14,17 +14,13 @@ import org.junit.runner.RunWith;
                 "html:target/report_cucumber/html_reports",
                 "json:target/report_cucumber/json-reports/cucumber.json"
         },
-        //tags = {"not @web"},
-        //tags = {"not @mobile"},
-        //tags = {"@google"},
+        tags = {"@nasa"},
         glue = {"steps", "driver"})
 
 public class RunCucumber_Test {
 
-
     @BeforeClass
     public static void setup() {
-
         utilsSelectDriver.fileProperties = new readProperties();
     }
 

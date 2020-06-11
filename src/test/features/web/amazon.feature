@@ -2,11 +2,12 @@ Feature: Amazon
 
   Background:
     Given Encender el navegador
-    When  Ir a "https://google.es"
+    And  El navegador introduce la URL "https://google.es"
 
   @web @amazon
   Scenario Outline: El navegador busca en amazon <productos>
-    And   Buscar por "amazon.es"
+    When   Buscar por "amazon.es"
+    And   Seleccionar el primer resultado en google
     And   Comprobar que lleva a "https://www.amazon.es/"
     And   Buscar en amazon <productos>
     And   Seleccionar el primer resultado

@@ -1,6 +1,7 @@
 package steps;
 
 import driver.typeDriver.selenium.Selenium;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.google.googlePage;
@@ -18,11 +19,15 @@ public class googleSteps {
         paginaGoogle.barra.submit();
     }
 
-    @Then("Comprobar que lleva a {string}")
-    public void comprobar_que_lleva_a_(String url) {
+    @And("Seleccionar el primer resultado en google")
+    public void seleccionarElPrimerResultadoEnGoogle() {
         googleResultPage googleResult = new googleResultPage();
         googleResult.resultFirst.click();
         Selenium.utilsDriver.sleep(3);
+    }
+
+    @Then("Comprobar que lleva a {string}")
+    public void comprobar_que_lleva_a_(String url) {
         String urlActual = Selenium.driver.getCurrentUrl();
         Selenium.utilsWebElements.assertEqualsText(urlActual, url, false);
     }

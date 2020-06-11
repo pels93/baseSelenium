@@ -6,17 +6,17 @@ Feature: Mobile
 
   @mobile
   Scenario:validacion del teclado
-    When comprobar todos los botones
-    And  Cuando presione el numero "1234567890.1234"
-    Then El resultado tiene que ser "1234567890.1234"
+    When comprueba todos los botones
+    And  presione el numero "1234567890.1234"
+    Then el resultado tiene que ser "1234567890.1234"
 
   @mobile
   Scenario Outline:<tipo_operacion> con la calculadora
-    When Cuando presione el numero <numero1>
+    When presione el numero <numero1>
     And presione el operador <operacion> para hacer una <tipo_operacion>
-    And Cuando presione el numero <numero2>
+    And presione el numero <numero2>
     And presione el boton =
-    Then El resultado tiene que ser <resultado>
+    Then el resultado tiene que ser <resultado>
 
     Examples:
       | numero1 | numero2 | operacion | tipo_operacion   | resultado |
@@ -27,11 +27,11 @@ Feature: Mobile
 
   @mobile
   Scenario Outline:calculadora con teclado realiza <tipo_operacion>
-    When Cuando presione el numero <numero1> por teclado
+    When presione el numero <numero1> por teclado
     And presione el operador <operacion> para hacer una <tipo_operacion>
-    And Cuando presione el numero <numero2> por teclado
+    And presione el numero <numero2> por teclado
     And presione el boton =
-    Then El resultado tiene que ser <resultado>
+    Then el resultado tiene que ser <resultado>
 
     Examples:
       | numero1 | numero2 | operacion | tipo_operacion   | resultado |

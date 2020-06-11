@@ -7,5 +7,5 @@ public class googleResultPage {
 
 
     //elementos papeados
-    public WebElement resultFirst = Selenium.utilsWebElements.findElementByCssSelector("div.rc");
+    public WebElement resultFirst = Selenium.utilsWebElements.findElementByCssSelector(".r a");
 }

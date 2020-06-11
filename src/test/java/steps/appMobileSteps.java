@@ -34,7 +34,7 @@ public class appMobileSteps {
         assert (auxCompareDate == 0);
     }
 
-    @When("comprobar todos los botones")
+    @When("comprueba todos los botones")
     public void comprobarTodosLosBotones() {
         Appium.utilsMobileElements.isDisplayOrEnable(calculadora.punto, false);
         Appium.utilsMobileElements.isDisplayOrEnable(calculadora.igual, false);
@@ -57,7 +57,7 @@ public class appMobileSteps {
         Appium.utilsMobileElements.isDisplayOrEnable(calculadora.num9, true);
     }
 
-    @When("Cuando presione el numero {string}")
+    @When("presione el numero {string}")
     public void cuandoPresioneElNumeroNumero(String arg0) {
 
         for (int c = 0; c < arg0.length(); c++) {
@@ -139,7 +139,7 @@ public class appMobileSteps {
         calculadora.igual.click();
     }
 
-    @Then("El resultado tiene que ser {string}")
+    @Then("el resultado tiene que ser {string}")
     public void elResutladoTieneQueSer(String arg0) {
         Appium.utilsMobileElements.longPressElement(calculadora.pantalla, 2000);
         calculadora.findResult();
@@ -161,7 +161,7 @@ public class appMobileSteps {
         Appium.utilsMobileElements.assertEqualsTextToDouble(aux, arg0, true);
     }
 
-    @When("Cuando presione el numero {string} por teclado")
+    @When("presione el numero {string} por teclado")
     public void cuandoPresioneElNumeroNumeroPorTeclado(String arg0) {
 
         String auxArg0 = arg0;

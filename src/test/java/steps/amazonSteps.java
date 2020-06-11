@@ -77,8 +77,9 @@ public class amazonSteps {
         cesta.imgProduct.click();
         Selenium.utilsDriver.sleep(2);
         cesta.searchProductName();
+        String auxNameProduct = cesta.nameProduct.get(0).getText();
         if (!cesta.nameProduct.isEmpty()) {
-            Selenium.utilsWebElements.assertEqualsText(cesta.nameProduct.get(0).getText(), descripProduct, false);
+            Selenium.utilsWebElements.assertContainText(descripProduct, auxNameProduct.substring(0, auxNameProduct.length() - 3), false);
         }
     }
 

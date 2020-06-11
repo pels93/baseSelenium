@@ -30,8 +30,9 @@
                     <sourceJsonReportDirectory>${cumcumber.reportJSON}</sourceJsonReportDirectory>
                     <!--suppress UnresolvedMavenProperty -->
                     <generatedHtmlReportDirectory>${cumcumber.reportHTML}</generatedHtmlReportDirectory>
+                    <!--suppress UnresolvedMavenProperty -->
                     <customParametersFile>
-                        ${project.build.testSourceDirectory}/properties_html_beutiful/customParameters.properties
+                        ${cumcumber.reportJSON}/RunCucumber.properties
                     </customParametersFile>
                     <customCss>${project.build.testSourceDirectory}/properties_html_beutiful/custom.css</customCss>
                     <!--enable see ScreenShot-->
@@ -58,6 +59,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
@@ -87,6 +89,13 @@
         </plugins>
     </build>
     <dependencies>
+        <!--maven compiler-->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <!--end maven compiler-->
         <!--cucumber-->
         <dependency>
             <groupId>io.cucumber</groupId>

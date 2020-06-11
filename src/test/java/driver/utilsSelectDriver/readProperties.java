@@ -5,6 +5,7 @@ import driver.interfacesTypeDriver.TypeDriver;
 import driver.interfacesTypeDriver.languages;
 import driver.typeDriver.appium.interfacesAppium.typeMobile;
 import driver.typeDriver.selenium.interfacesSelenium.Browsers;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Platform;
 
 import java.io.File;
@@ -17,15 +18,16 @@ import java.util.Properties;
 public class readProperties {
     private final String propFileName = "RunCucumber.properties";
     private final String rutacompleta = utilsSelectDriver.ProjectDirectory() + "/src/test/java/" + propFileName;
-    private File initialFile;
+    private final File initialFile;
     private InputStream inputStream;
-    private HashMap<String, String> capabilitiesCucumber;
+    private final HashMap<String, String> capabilitiesCucumber;
 
     public readProperties() {
+        Properties prop = new Properties();
+        capabilitiesCucumber = new HashMap<>();
+        initialFile = new File(rutacompleta);
+
         try {
-            Properties prop = new Properties();
-            capabilitiesCucumber = new HashMap<>();
-            initialFile = new File(rutacompleta);
             inputStream = new FileInputStream(initialFile);
             prop.load(inputStream);
             for (final String name : prop.stringPropertyNames())
@@ -45,6 +47,7 @@ public class readProperties {
                 utilsSelectDriver.printError("ERROR -> Unable to locate the file " + "\"" + propFileName + "\"\n" + initialFile.toString(), "");
             }
         }
+        copyProperties();
     }
 
     public int getTypeDriver() {
@@ -228,6 +231,11 @@ public class readProperties {
         return capabilitiesCucumber.get("cucumber.adbName");
     }
 
+    private String getDirectoryFileJSON() {
+        String aux = capabilitiesCucumber.get("cumcumber.reportJSON");
+        return aux.substring(0, aux.indexOf('$'));
+    }
+
     public Boolean getEnableDeleteOldDrivers() {
         String aux = capabilitiesCucumber.get("cucumber.enableDeleteOldDrivers");
         boolean result = false;
@@ -235,6 +243,36 @@ public class readProperties {
             result = true;
         }
         return result;
+    }
+
+    private void copyProperties() {
+        String rutaDestino;
+        if (getTypeDriver() == TypeDriver.selenium) {
+            rutaDestino = utilsSelectDriver.ProjectDirectory() + "/" + getDirectoryFileJSON()
+                    + capabilitiesCucumber.get("cucumber.typeDriver") + "_"
+                    + capabilitiesCucumber.get("cucumber.typeBrowser") + "/"
+                    + propFileName;
+        } else {
+            rutaDestino = utilsSelectDriver.ProjectDirectory() + "/" + getDirectoryFileJSON()
+                    + capabilitiesCucumber.get("cucumber.typeDriver") + "_"
+                    + capabilitiesCucumber.get("cucumber.app") + "_"
+                    + capabilitiesCucumber.get("cucumber.nameMobile") + "/"
+                    + propFileName;
+        }
+
+        File fileIni = new File(rutacompleta);
+        File fileFinal = new File(rutaDestino);
+
+        try {
+            FileUtils.copyFile(fileIni, fileFinal);
+        } catch (Exception ignored) {
+        }
+        if (fileFinal.exists()) {
+            utilsSelectDriver.printMsg("Copy file from \n" + fileIni.toString() + "\n to \n" + fileFinal.toString());
+        } else {
+            utilsSelectDriver.printMsg("NOT copy file from \n" + fileIni.toString() + "\n to \n" + fileFinal.toString());
+        }
+
     }
 
 }

@@ -20,7 +20,7 @@ public class utilsWebElements {
 
     public void assertContainText(String textoCompleto, String textoAEncontrar, boolean enableError) {
         try {
-            assert (textoCompleto.toLowerCase().contains(textoAEncontrar));
+            assert (textoCompleto.contains(textoAEncontrar));
         } catch (AssertionError a) {
             String msn = "WARNING -> el texto \n" + textoAEncontrar + "\n no esta en  \n" + textoCompleto;
             if (enableError) {
