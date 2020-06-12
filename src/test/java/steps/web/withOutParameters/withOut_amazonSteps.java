@@ -1,10 +1,10 @@
-package steps.withOutParameters;
+package steps.web.withOutParameters;
 
 import driver.typeDriver.selenium.Selenium;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.amazon.amazonPage;
-import pages.amazon.amazonProductCestPage;
+import pages.web.amazon.amazonPage;
+import pages.web.amazon.amazonProductCestPage;
 
 
 public class withOut_amazonSteps {

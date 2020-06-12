@@ -1,11 +1,11 @@
-package steps.google;
+package steps.web.google;
 
 import driver.typeDriver.selenium.Selenium;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.google.googlePage;
-import pages.google.googleResultPage;
+import pages.web.google.googlePage;
+import pages.web.google.googleResultPage;
 
 public class googleSteps {
 

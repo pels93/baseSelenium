@@ -1,11 +1,11 @@
-package steps.amazon;
+package steps.web.amazon;
 
 import driver.typeDriver.selenium.Selenium;
 import driver.typeDriver.selenium.interfacesSelenium.Browsers;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebElement;
-import pages.amazon.*;
+import pages.web.amazon.*;
 
 import java.util.List;
 
