@@ -34,7 +34,7 @@
                     <customParametersFile>
                         ${cumcumber.reportJSON}/RunCucumber.properties
                     </customParametersFile>
-                    <customCss>${project.build.testSourceDirectory}/properties_html_beutiful/custom.css</customCss>
+                    <customCss>${project.basedir}/src/test/resources/properties_html_beutiful/custom.css</customCss>
                     <!--enable see ScreenShot-->
                     <expandBeforeAfterHooks>true</expandBeforeAfterHooks>
                     <expandStepHooks>true</expandStepHooks>

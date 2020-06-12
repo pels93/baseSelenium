@@ -1,4 +1,4 @@
-package steps;
+package steps.google;
 
 import driver.typeDriver.selenium.Selenium;
 import io.cucumber.java.en.And;
@@ -11,12 +11,22 @@ public class googleSteps {
 
     private googlePage paginaGoogle;
 
-    @When("Buscar por {string}")
-    public void buscar_por(String string) {
+    @When("Se visualiza la pagina de busqueda de google")
+    public void seVisualizaLaPaginaDeBusquedaDeGoogle() {
         paginaGoogle = new googlePage();
+    }
+
+    @When("Buscar en google por {string}")
+    public void buscar_por(String string) {
         paginaGoogle.barra.clear();
         paginaGoogle.barra.sendKeys(string);
         paginaGoogle.barra.submit();
+    }
+
+    @When("presiona en el boton iniciar sesion en google")
+    public void presionaEnElBotonIniciarSesionEnGoogle() {
+        paginaGoogle.btnStartSesion.click();
+        Selenium.utilsDriver.sleep(10);
     }
 
     @And("Seleccionar el primer resultado en google")

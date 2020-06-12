@@ -4,14 +4,14 @@ Feature: Mobile
     Given AppMobile Cerrar Popup
     And Comprobar fecha
 
-  @mobile
+  @mobile @validate
   Scenario:validacion del teclado
     When comprueba todos los botones
     And  presione el numero "1234567890.1234"
     Then el resultado tiene que ser "1234567890.1234"
 
   @mobile
-  Scenario Outline:<tipo_operacion> con la calculadora
+  Scenario Outline:calculadora SIN teclado realiza <tipo_operacion>
     When presione el numero <numero1>
     And presione el operador <operacion> para hacer una <tipo_operacion>
     And presione el numero <numero2>
@@ -25,7 +25,7 @@ Feature: Mobile
       | "3"     | "4"     | "*"       | "multiplicacion" | "12"      |
       | "12"    | "4"     | "/"       | "division"       | "3"       |
 
-  @mobile
+  @mobile @teclado
   Scenario Outline:calculadora con teclado realiza <tipo_operacion>
     When presione el numero <numero1> por teclado
     And presione el operador <operacion> para hacer una <tipo_operacion>

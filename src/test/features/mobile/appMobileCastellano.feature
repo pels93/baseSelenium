@@ -5,7 +5,7 @@ Característica:Feature de movil en castellano
     Dada AppMobile Cerrar Popup
     Y Comprobar fecha
 
-  @mobile
+  @mobile @castellano
   Escenario: validacion del teclado
     Cuando comprueba todos los botones
     Y presione el numero "1234567890.1234"

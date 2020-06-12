@@ -1,4 +1,4 @@
-package steps;
+package steps.amazon;
 
 import driver.typeDriver.selenium.Selenium;
 import driver.typeDriver.selenium.interfacesSelenium.Browsers;
@@ -59,15 +59,13 @@ public class amazonSteps {
 
     @And("Si salta oferta se cierra")
     public void siSaltaOfertaSeCierra() {
-        amazonPopupPage popup= new amazonPopupPage();
-        if (popup.add.size()>0)
-        {
+        amazonPopupPage popup = new amazonPopupPage();
+        if (popup.add.size() > 0) {
             popup.notAdd.get(0).click();
             amazonAfterPopupPage afterPopup = new amazonAfterPopupPage();
             afterPopup.btnCesta.click();
         }
-        if (popup.addSecondType.size()>0)
-        {
+        if (popup.addSecondType.size() > 0) {
             popup.notSecondType.get(0).click();
         }
     }
