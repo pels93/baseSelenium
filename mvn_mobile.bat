@@ -1,4 +1,5 @@
 @echo off
+mvn clean
 adb kill-server
 adb kill-server
 cls
