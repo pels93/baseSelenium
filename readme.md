@@ -1,8 +1,8 @@
-#BaseSelenium 
+# BaseSelenium 
 
 #####This project is designed in java to have a starter environment to test in seleium and appium.
 
-##Support
+## Support
 	#NOTE this proyect only tested in Windows
 
 Web  | Mobile
@@ -13,7 +13,7 @@ opera  |
 safari |  
 google chrome  |  
 
-##Requirement 
+## Requirement 
 Java [Link](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
 
 Maven [Link](https://maven.apache.org/download.cgi).
@@ -41,10 +41,10 @@ When intalled android open the terminal and execute
 	SETX /M PATH "%PATH%;%ANDROID_HOME%\tools"
 	SETX /M PATH "%PATH%;%ANDROID_HOME%\tools\bin"
 
-##Install
+## Install
 download the project and import it into Kotline.
 
-###Sequence Run
+### Sequence Run
                     
 ```seq
 Java->RunCucumber.java: Init RunCucumber.java
@@ -66,7 +66,7 @@ StartTypeDriver.java->RunCucumber.java: Ended test
 RunCucumber.java->Java: Ended test
 ```
 
-##Settings
+## Settings
 
 setting file  `RunCucumber.properties` from web
 
@@ -99,13 +99,14 @@ Setting file  `RunCucumber.properties` from mobile
     
     
 ----
-##Run test
+## Run test
 Open the terminal in the locate proyect and write
+
 `start mvn post-integration-test -Dmaven.test.failure.ignore=true`
 
 When the tests are complete, reports will have been generated in the  `reports` folder.
 
-##Thank
+## Thank
 >cluecumber-report-plugin [Link](https://github.com/trivago/cluecumber-report-plugin).
 
 >webdrivermanager [Link](https://github.com/bonigarcia/webdrivermanager)
