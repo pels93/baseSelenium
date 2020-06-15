@@ -25,17 +25,17 @@ Feature: Amazon
 
 
     Examples:
-      | productos   |
-      | "patatas"   |
-      | "ajo"       |
-      | "reloj"     |
-      | "paño"      |
-      | "camion"    |
-      | "juguete"   |
-      | "alambre"   |
-      | "tornillos" |
-      | "lampara"   |
-      | "muebles"   |
+      | productos         |
+      | "patatas"         |
+      | "ajo"             |
+      | "reloj"           |
+      | "paño"            |
+      | "camion"          |
+      | "lapices colores" |
+      | "alambre"         |
+      | "tornillos"       |
+      | "lampara"         |
+      | "muebles"         |
 
 
 

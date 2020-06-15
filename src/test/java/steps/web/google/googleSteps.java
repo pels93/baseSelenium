@@ -38,7 +38,7 @@ public class googleSteps {
 
     @Then("Comprobar que lleva a {string}")
     public void comprobar_que_lleva_a_(String url) {
-        String urlActual = Selenium.driver.getCurrentUrl();
+        String urlActual = Selenium.utilsDriver.getURLPage();
         Selenium.utilsWebElements.assertEqualsText(urlActual, url, false);
     }
 

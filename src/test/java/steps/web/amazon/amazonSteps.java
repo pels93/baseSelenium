@@ -1,32 +1,23 @@
 package steps.web.amazon;
 
 import driver.typeDriver.selenium.Selenium;
-import driver.typeDriver.selenium.interfacesSelenium.Browsers;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import org.openqa.selenium.WebElement;
 import pages.web.amazon.*;
-
-import java.util.List;
 
 
 public class amazonSteps {
 
     amazonProductPage product;
     String descripProduct;
-    amazonProductCestPage cesta;
-
-    @Then("Lleva a la pagina de amazon")
-    public void llevaALaPaginaDeAmazon() {
-        System.out.println("pepe");
-    }
-
+    String urlProducto;
 
     @And("Buscar en amazon {string}")
     public void buscarEnAmazon(String palabra) {
-        Selenium.utilsDriver.sleep(1);
         amazonPage amazon = new amazonPage();
+        Selenium.utilsDriver.sleep(2);
         amazon.select.selectByIndex(0);
+        amazon.barrabusqueda.click();
         amazon.barrabusqueda.sendKeys(palabra);
         amazon.barrabusqueda.submit();
     }
@@ -34,20 +25,15 @@ public class amazonSteps {
     @And("Seleccionar el primer resultado")
     public void seleccionarElPrimerResultado() {
         Selenium.utilsDriver.sleep(1);
-        List<WebElement> resultados;
-        if (Selenium.browser != Browsers.firefox) {
-            amazonSearchResultPage result = new amazonSearchResultPage();
-            resultados = result.resultados;
-        } else {
-            resultados = Selenium.utilsWebElements.findElementsByCssSelector("div.rush-component.s-expand-height", 5000);
-        }
-        resultados.get(0).click();
+        amazonSearchResultPage result = new amazonSearchResultPage();
+        result.resultados.get(0).click();
     }
 
     @And("Se visualiza la pagina del producto")
     public void seVisualizaLaPaginaDelProducto() {
         Selenium.utilsDriver.sleep(1);
         product = new amazonProductPage();
+        urlProducto = Selenium.utilsDriver.getURLPage();
         descripProduct = product.titleProduct.getText();
     }
 
@@ -59,32 +45,36 @@ public class amazonSteps {
 
     @And("Si salta oferta se cierra")
     public void siSaltaOfertaSeCierra() {
-        amazonPopupPage popup = new amazonPopupPage();
-        if (popup.add.size() > 0) {
-            popup.notAdd.get(0).click();
-            amazonAfterPopupPage afterPopup = new amazonAfterPopupPage();
-            afterPopup.btnCesta.click();
-        }
-        if (popup.addSecondType.size() > 0) {
-            popup.notSecondType.get(0).click();
+        if (urlProducto.equals(Selenium.utilsDriver.getURLPage())) {
+            amazonPopupPage popup = new amazonPopupPage();
+            if (popup.add.size() > 0) {
+                popup.firstPopup();
+                popup.notAdd.get(0).click();
+                amazonAfterPopupPage afterPopup = new amazonAfterPopupPage();
+                afterPopup.btnCesta.click();
+            }
+            if (popup.addSecondType.size() > 0) {
+                popup.secondPopup();
+                popup.notSecondType.get(0).click();
+            }
         }
     }
 
     @Then("El producto {string} esta en la cesta de {string}")
     public void elProductoProductosEstaEnLaCestaDe(String arg0, String arg1) {
+        amazonProductCestPage cesta = new amazonProductCestPage();
         Selenium.utilsDriver.sleep(2);
-        cesta = new amazonProductCestPage();
-        cesta.imgProduct.click();
-        Selenium.utilsDriver.sleep(2);
+        amazonPage amazon = new amazonPage();
+        amazon.barrabusqueda.click();
+        Selenium.utilsWebElements.clickLong(cesta.imgProduct);
         cesta.searchProductName();
         String auxNameProduct = cesta.nameProduct.get(0).getText();
-        if (!cesta.nameProduct.isEmpty()) {
-            Selenium.utilsWebElements.assertContainText(descripProduct, auxNameProduct.substring(0, auxNameProduct.length() - 3), false);
-        }
+        Selenium.utilsWebElements.assertContainText(descripProduct, auxNameProduct.substring(0, auxNameProduct.length() - 3), false);
     }
 
     @Then("El total de productos es {string}")
     public void elTotalDeProductosEs(String cantidad) {
+        amazonProductCestPage cesta = new amazonProductCestPage();
         Selenium.utilsWebElements.assertEqualsText(cesta.totalProdcutos.getText(), cantidad, false);
     }
 

@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -44,56 +46,92 @@ public class utilsWebElements {
         }
     }
 
-    public WebElement findElementById(String texto) {
-        return driver.findElement(By.id(texto));
+    public WebElement findElementById(String id) {
+        return driver.findElement(By.id(id));
     }
 
-    public WebElement findElementAByHref(String texto) {
-        return driver.findElement(By.xpath("//a[@href='" + texto + "']"));
+    public WebElement findElementAByHref(String Href) {
+        return driver.findElement(By.xpath("//a[@href='" + Href + "']"));
     }
 
-    public WebElement findElementLinkByHref(String texto) {
-        return driver.findElement(By.xpath("//link[@href='" + texto + "']"));
+    public WebElement findElementByLinkHref(String LinkHref) {
+        return driver.findElement(By.xpath("//link[@href='" + LinkHref + "']"));
     }
 
-    public WebElement findElementByName(String texto) {
-        return driver.findElement(By.name(texto));
+    public WebElement findElementByName(String Name) {
+        return driver.findElement(By.name(Name));
     }
 
-    public WebElement findElementByCssSelector(String texto) {
-        return driver.findElement(By.cssSelector(texto));
+    public WebElement findElementByCssSelector(String CssSelector) {
+        return driver.findElement(By.cssSelector(CssSelector));
     }
 
-    public List<WebElement> findElementsByCssSelector(String texto, int milliseconds) {
+    public List<WebElement> findElementsByCssSelector(String CssSelector, int milliseconds) {
         Selenium.utilsDriver.waiter(5000);
-        return driver.findElements(By.cssSelector(texto));
+        return driver.findElements(By.cssSelector(CssSelector));
     }
 
-    public WebElement findElementByText(String texto) {
-        return driver.findElement(By.xpath("//*[text()='" + texto + "']"));
+    public WebElement findElementByText(String text) {
+        return driver.findElement(By.xpath("//*[text()='" + text + "']"));
         //("//*[contains(text(), 'My Button')]")
     }
 
-    public List<WebElement> findElementsByText(String texto) {
-        return driver.findElements(By.xpath("//*[text()='" + texto + "']"));
+    public List<WebElement> findElementsByText(String text) {
+        return driver.findElements(By.xpath("//*[text()='" + text + "']"));
         //("//*[contains(text(), 'My Button')]")
     }
 
-    public WebElement findElementByHref(String texto) {
-        return driver.findElement(By.xpath("//*[@href='" + texto + "']"));
+    public WebElement findElementByHref(String href) {
+        return driver.findElement(By.xpath("//*[@href='" + href + "']"));
     }
 
-    public List<WebElement> findElementsByHref(String texto) {
-        return driver.findElements(By.xpath("//*[@href='" + texto + "']"));
+    public List<WebElement> findElementsByHref(String xpath) {
+        return driver.findElements(By.xpath("//*[@href='" + xpath + "']"));
     }
 
-    public WebElement findElementByClassName(String texto) {
-        return driver.findElement(By.className(texto));
+    public WebElement findElementByClassName(String className) {
+        return driver.findElement(By.className(className));
     }
 
-    public List<WebElement> findElemenstById(String texto, int milliseconds) {
+    public List<WebElement> findElementsById(String id, int milliseconds) {
         Selenium.utilsDriver.waiter(milliseconds);
-        return driver.findElements(By.id(texto));
+        return driver.findElements(By.id(id));
+    }
+
+    public Select findSelectorCssSelector(String Css) {
+        return new Select(Selenium.utilsWebElements.findElementByCssSelector(Css));
+    }
+
+    public Select findSelectorById(String id) {
+        return new Select(Selenium.utilsWebElements.findElementById(id));
+    }
+
+    public void clickDouble(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.doubleClick(element)
+                .release()
+                .perform();
+    }
+
+    public void clickLong(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(element)
+                .release()
+                .perform();
+    }
+
+    public void clickposition(int posX, int posY) {
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(posX, posY).click()
+                .release()
+                .perform();
+    }
+
+    public void clickButtonRight(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.contextClick(element)
+                .release()
+                .perform();
     }
 
 }

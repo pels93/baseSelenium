@@ -69,6 +69,10 @@ public class utilsSeleiumDriver {
         scenario.attach(screenshot, "image/png", "attachment");
     }
 
+    public String getURLPage() {
+        return Selenium.driver.getCurrentUrl();
+    }
+
     public void goToBack() {
         driver.navigate().back();
     }
