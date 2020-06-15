@@ -1,6 +1,6 @@
 # BaseSelenium 
 
-#####This project is designed in java to have a starter environment to test in seleium and appium.
+##### This project is designed in java to have a starter environment to test in seleium and appium.
 
 ## Support
 	#NOTE this proyect only tested in Windows
