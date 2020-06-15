@@ -22,7 +22,7 @@ Intellij [Link](https://www.jetbrains.com/idea/download/).
 
 Android Studio [Link](https://developer.android.com/studio).
 
-When installed Java JDK, download Maven in `%ProgramFiles%`.After open the terminal and execute with  `your version`
+When installed Java JDK, download Maven in `%ProgramFiles%`.After open the terminal with administrator permissions and execute with  `your version`
 
 	@echo off
 	SETX /M M2_HOME "%ProgramFiles%\apache-maven-3.6.3"
