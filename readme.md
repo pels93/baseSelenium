@@ -41,6 +41,9 @@ When intalled android open the terminal and execute
 	SETX /M PATH "%PATH%;%ANDROID_HOME%\tools"
 	SETX /M PATH "%PATH%;%ANDROID_HOME%\tools\bin"
 
+When run Intellij install the plugins `Cucumber for Java` and `Gherkin`
+
+
 ## Install
 download the project and import it into Kotline.
 
