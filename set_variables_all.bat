@@ -20,3 +20,4 @@ start
 echo adb
 echo emulator
 echo avdmanager list avd
+pause
