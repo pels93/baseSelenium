@@ -11,13 +11,13 @@ Feature: Amazon
   @web @amazon
   Scenario Outline: El navegador busca en amazon <productos>
     When  Buscar en amazon <productos>
-    And   Seleccionar el primer resultado
+    And   Seleccionar el producto de la posicion "1"
     And   Se visualiza la pagina del producto
     And   Se add a la cesta
     And   Si salta oferta se cierra
     And   El producto <productos> esta en la cesta de "amazon.es"
     And   Buscar en amazon "cebolla"
-    And   Seleccionar el primer resultado
+    And   Seleccionar el producto de la posicion "1"
     And   Se visualiza la pagina del producto
     And   Se add a la cesta
     And   El producto <productos> esta en la cesta de "amazon.es"
@@ -28,7 +28,7 @@ Feature: Amazon
       | productos         |
       | "patatas"         |
       | "ajo"             |
-      | "reloj"           |
+      | "pintura"         |
       | "paño"            |
       | "camion"          |
       | "lapices colores" |

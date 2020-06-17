@@ -22,11 +22,11 @@ public class amazonSteps {
         amazon.barrabusqueda.submit();
     }
 
-    @And("Seleccionar el primer resultado")
-    public void seleccionarElPrimerResultado() {
+    @And("Seleccionar el producto de la posicion {string}")
+    public void seleccionarElProductoDeLaPosicion(String arg0) {
         Selenium.utilsDriver.sleep(1);
         amazonSearchResultPage result = new amazonSearchResultPage();
-        result.resultados.get(0).click();
+        result.resultados.get(Integer.parseInt(arg0)).click();
     }
 
     @And("Se visualiza la pagina del producto")
