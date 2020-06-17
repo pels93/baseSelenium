@@ -31,6 +31,7 @@ public class googleSteps {
 
     @And("Seleccionar el primer resultado en google")
     public void seleccionarElPrimerResultadoEnGoogle() {
+        Selenium.utilsDriver.sleep(2);
         googleResultPage googleResult = new googleResultPage();
         googleResult.resultFirst.click();
         Selenium.utilsDriver.sleep(3);

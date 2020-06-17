@@ -29,13 +29,6 @@ Feature: Amazon
       | "patatas"         |
       | "ajo"             |
       | "pintura"         |
-      | "paño"            |
-      | "camion"          |
-      | "lapices colores" |
-      | "alambre"         |
-      | "tornillos"       |
-      | "lampara"         |
-      | "muebles"         |
 
 
 
