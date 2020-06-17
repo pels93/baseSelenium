@@ -66,6 +66,7 @@ public class amazonSteps {
         Selenium.utilsDriver.sleep(2);
         amazonPage amazon = new amazonPage();
         amazon.barrabusqueda.click();
+        Selenium.utilsDriver.sleep(1);
         Selenium.utilsWebElements.clickLong(cesta.imgProduct);
         cesta.searchProductName();
         String auxNameProduct = cesta.nameProduct.get(0).getText();
