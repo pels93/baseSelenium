@@ -64,13 +64,16 @@ StartTypeDriver.java->RunCucumber.java: Ended test
 RunCucumber.java->Java: Ended test
 ```
 
-##Structure of the program
+## Structure of the program
 Directory  | Functionality
 ------------- | -------------
 baseSelenium\src\test\features  | Contains the .features
 baseSelenium\src\test\java\driver  | Contains the typeDriver Appium and Selenium
 baseSelenium\src\test\java\page   |  Contains the mapped elements
 baseSelenium\src\test\java\steps  |  Contains the features steps
+baseSelenium\src\test\java\driver  | Contains the typeDriver Appium and Selenium
+baseSelenium\src\test\java\driver\typeDriver\appium  | Contains the core of Appium
+baseSelenium\src\test\java\driver\typeDriver\selenium   | Contains the core of Selenium
 
 
 ## Settings
