@@ -32,6 +32,4 @@ CLS
 CLS
 SETX /M M2_HOME "%ProgramFiles%\%nombre_MAVEN%"
 SETX /M JAVA_HOME "%ProgramFiles%\Java\%nombre_JDK%"
-SETX /M PATH "%PATH%;%M2_HOME%\bin"
-SETX /M PATH "%PATH%;%JAVA_HOME%\bin"
 pause
