@@ -10,6 +10,6 @@ ping -n 30 127.0.0.1 >nul
 adb devices
 cls
 start mvn post-integration-test -Dmaven.test.failure.ignore=true
-ping -n 10 127.0.0.1 >nul
+ping -n 20 127.0.0.1 >nul
 (echo cucumber.typeDriver=appium&echo urlServerAppium=http://127.0.0.1:4723/wd/hub&echo cucumber.tags=--tags "@mobile"&echo cucumber.mobilePlatform=Android&echo cucumber.mobileLanguage=ES_es&echo cucumber.app=test.apk&echo cucumber.nameMobile=Pixel_2_API_27_2&echo cucumber.versionMobile=8.1.0&echo cucumber.adbName=emulator-5554&echo #cucumber set&echo cucumber.TypeTest=${cucumber.typeDriver}_${cucumber.app}_${cucumber.nameMobile}&echo cucumber.report=--plugin json:reports/json/${cucumber.TypeTest}/report.json --plugin pretty --plugin summary&echo cumcumber.reportHTML=reports/html/${cucumber.TypeTest}/&echo cumcumber.reportJSON=reports/json/${cucumber.TypeTest}/) > src\test\java\RunCucumber.properties
 start mvn post-integration-test -Dmaven.test.failure.ignore=true
