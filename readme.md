@@ -22,40 +22,23 @@ Intellij [Link](https://www.jetbrains.com/idea/download/).
 
 Android Studio [Link](https://developer.android.com/studio).
 
-When installed `Java JDK`, download `Maven` in `%ProgramFiles%`.After open the terminal with administrator permissions and execute with  `your version`
-
-	@echo off
-	SETX /M M2_HOME "%ProgramFiles%\apache-maven-3.6.3"
-	SETX /M JAVA_HOME "%ProgramFiles%\Java\jdk1.8.0_251"
-	SETX /M PATH "%PATH%;%M2_HOME%\bin"
-	SETX /M PATH "%PATH%;%JAVA_HOME%\bin"
+When installed **Java JDK**, download **Maven** run as Administrator
 	
-Open other terminal and run 
+ 
+	set_variables_javaMaven_1.bat
+	set_variables_javaMaven_2.bat
+
+When installed **Android Studio** run as Administrator
 
 	@echo off
-	SETX /M PATH "%PATH%;%M2_HOME%\bin"
-	SETX /M PATH "%PATH%;%JAVA_HOME%\bin"
+	set_variables_android_1
+	set_variables_android_2
 
-When installed `Android Studio` open the terminal and execute
-
-	@echo off
-	SETX /M ANDROID_HOME "%LOCALAPPDATA%\Android\Sdk"
-	SETX /M ANDROID_SDK_HOME "%SystemDrive%%HOMEPATH%\.android"
-	SETX /M ANDROID_AVD_HOME "%SystemDrive%%HOMEPATH%\.android\avd"
-	
-Open other terminal and run 
-
-	@echo off
-	SETX /M PATH "%PATH%;%ANDROID_HOME%\platforms"
-	SETX /M PATH "%PATH%;%ANDROID_HOME%\platform-tools"
-	SETX /M PATH "%PATH%;%ANDROID_HOME%\tools"
-	SETX /M PATH "%PATH%;%ANDROID_HOME%\tools\bin"
-
-When run Intellij install the plugins `Cucumber for Java` and `Gherkin`
+When run **Intellij** install the plugins `Cucumber for Java` and `Gherkin`
 
 
 ## Install
-download the project and import it into Kotline.
+download the project and import it into Intellij.
 
 ### Sequence Run
                     
