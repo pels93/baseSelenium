@@ -22,6 +22,8 @@ Intellij [Link](https://www.jetbrains.com/idea/download/).
 
 Android Studio [Link](https://developer.android.com/studio).
 
+Appium Desktop [Link](http://appium.io/downloads.html).
+
 When installed **Java JDK**, download **Maven** run as Administrator
 	
  
@@ -62,7 +64,17 @@ StartTypeDriver.java->RunCucumber.java: Ended test
 RunCucumber.java->Java: Ended test
 ```
 
+##Structure of the program
+Directory  | Functionality
+------------- | -------------
+baseSelenium\src\test\features  | Contains the .features
+baseSelenium\src\test\java\driver  | Contains the typeDriver Appium and Selenium
+baseSelenium\src\test\java\page   |  Contains the mapped elements
+baseSelenium\src\test\java\steps  |  Contains the features steps
+
+
 ## Settings
+The file `RunCucumber.properties` is `baseSelenium\src\test\java`
 
 setting file  `RunCucumber.properties` from web
 
@@ -92,15 +104,31 @@ Setting file  `RunCucumber.properties` from mobile
 	cucumber.report=--plugin json:reports/json/${cucumber.TypeTest}/report.json --plugin pretty --plugin summary
 	cumcumber.reportHTML=reports/html/${cucumber.TypeTest}/
 	cumcumber.reportJSON=reports/json/${cucumber.TypeTest}/
-    
-    
+     
 ----
+## Write Steps
+With **appium** you need declare in your page.class
+    
+	public MobileElement clear = Appium.utilsMobileElements.findElementById("backspace");
+	public MobileElement clear = (MobileElement) Appium.driver.findElement(By.id("backspace"));
+
+With **selenium** you need declare in your page.class
+ 
+ 	public WebElement barra = Selenium.utilsWebElements.findElementByName("q");
+ 	public WebElement barra = Selenium.driver.findElement(By.id("q"));
+
+
 ## Run test
-Open the terminal in the locate proyect and write
+If you like run test in **Java**, run the class RunCucumber_Test.class
 
-`start mvn post-integration-test -Dmaven.test.failure.ignore=true`
+	#NOTE in this mode cucumber.tags is read from RunCucumber_Test.class
 
-When the tests are complete, reports will have been generated in the  `reports` folder.
+If you like run test in **maven**, open the terminal in the locate proyect and write
+
+	mvn_web
+	mvn_mobile
+
+When the tests are complete, reports will have been generated in the  `baseSelenium\reports`.
 
 ## Thank
 >cluecumber-report-plugin [Link](https://github.com/trivago/cluecumber-report-plugin).
