@@ -5,7 +5,5 @@ import org.openqa.selenium.WebElement;
 
 public class googleResultPage {
 
-
-    //elementos papeados
     public WebElement resultFirst = Selenium.utilsWebElements.findElementByCssSelector(".r a");
 }

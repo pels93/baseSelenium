@@ -1,6 +1,6 @@
 # BaseSelenium 
 
-##### This project is designed in java to have a starter environment to test in seleium and appium.
+##### This project is designed in java to have a starter environment to test in selenium and appium.
 
 ## Support
 	#NOTE this proyect only tested in Windows
@@ -56,8 +56,6 @@ Selenium.java->webdrivermanager: download browser driver type
 Selenium.java->webdrivermanager: Init browser type
 webdrivermanager->Selenium.java: Inited browser type
 Selenium.java->StartTypeDriver.java: Inited browser type
-StartTypeDriver.java->Appium.java: Init mobile type
-Appium.java->StartTypeDriver.java: Inited mobile type
 StartTypeDriver.java->RunCucumber.java: Start test
 RunCucumber.java->StartTypeDriver.java: End test
 StartTypeDriver.java->RunCucumber.java: Ended test
@@ -68,7 +66,6 @@ RunCucumber.java->Java: Ended test
 Directory  | Functionality
 ------------- | -------------
 baseSelenium\src\test\features  | Contains the .features
-baseSelenium\src\test\java\driver  | Contains the typeDriver Appium and Selenium
 baseSelenium\src\test\java\page   |  Contains the mapped elements
 baseSelenium\src\test\java\steps  |  Contains the features steps
 baseSelenium\src\test\java\driver  | Contains the typeDriver Appium and Selenium
