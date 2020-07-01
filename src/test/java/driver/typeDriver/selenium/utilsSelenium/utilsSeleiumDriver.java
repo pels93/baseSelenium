@@ -107,12 +107,33 @@ public class utilsSeleiumDriver {
     public void moveElementByPosition(WebElement elem) {
         int width = elem.getSize().getWidth();
         Actions act = new Actions(driver);
-        act.moveToElement(elem).moveByOffset((width / 2) - 2, 0).click().perform();
+        act.moveToElement(elem).moveByOffset((width / 2) - 2, 0).click().release().perform();
     }
 
-    public void ClickByPosition(int poxX, int posY) {
-        Actions act = new Actions(driver);
-        act.moveByOffset(poxX, posY).click().perform();
+    public void clickLong(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(element)
+                .release()
+                .perform();
+    }
+
+    public void clickposition(int posX, int posY) {
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(posX, posY).click()
+                .release()
+                .perform();
+    }
+
+    public void clickButtonRight(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.contextClick(element)
+                .release()
+                .perform();
+    }
+
+    public void Scroll(int posY)
+    {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,"+posY+")");
     }
 
 }

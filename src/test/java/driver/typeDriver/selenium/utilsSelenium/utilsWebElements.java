@@ -113,25 +113,5 @@ public class utilsWebElements {
                 .perform();
     }
 
-    public void clickLong(WebElement element) {
-        Actions actions = new Actions(driver);
-        actions.clickAndHold(element)
-                .release()
-                .perform();
-    }
-
-    public void clickposition(int posX, int posY) {
-        Actions actions = new Actions(driver);
-        actions.moveByOffset(posX, posY).click()
-                .release()
-                .perform();
-    }
-
-    public void clickButtonRight(WebElement element) {
-        Actions actions = new Actions(driver);
-        actions.contextClick(element)
-                .release()
-                .perform();
-    }
 
 }

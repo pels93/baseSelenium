@@ -39,8 +39,12 @@ public class googleSteps {
 
     @Then("Comprobar que lleva a {string}")
     public void comprobar_que_lleva_a_(String url) {
+        Selenium.utilsDriver.sleep(1);
         String urlActual = Selenium.utilsDriver.getURLPage();
         Selenium.utilsWebElements.assertEqualsText(urlActual, url, false);
+        Selenium.utilsDriver.sleep(1);
+        Selenium.utilsDriver.Scroll(400);
+        Selenium.utilsDriver.sleep(2);
     }
 
 }
