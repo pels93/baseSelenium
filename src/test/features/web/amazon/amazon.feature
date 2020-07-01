@@ -16,7 +16,7 @@ Feature: Amazon
     And   Se add a la cesta
     And   Si salta oferta se cierra
     And   El producto <productos> esta en la cesta de "amazon.es"
-    And   Buscar en amazon "cebolla"
+    And   Buscar en amazon <productos2>
     And   Seleccionar el producto de la posicion "1"
     And   Se visualiza la pagina del producto
     And   Se add a la cesta
@@ -25,10 +25,10 @@ Feature: Amazon
 
 
     Examples:
-      | productos         |
-      | "patatas"         |
-      | "ajo"             |
-      | "pintura"         |
+      | productos | productos2 |
+      | "patatas" | "ajo"      |
+      | "ajo"     | "patatas"  |
+      | "pintura" | "pintura"  |
 
 
 

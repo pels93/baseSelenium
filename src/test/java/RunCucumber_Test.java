@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
                 "html:target/report_cucumber/html_reports",
                 "json:target/report_cucumber/json-reports/cucumber.json"
         },
-        tags = {"@google"},
+        tags = {"@web and not @google and not @amazon"},
         glue = {"steps", "driver"})
 
 public class RunCucumber_Test {
