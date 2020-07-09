@@ -3,6 +3,7 @@ package driver.typeDriver.selenium.utilsSelenium;
 
 import driver.typeDriver.selenium.Selenium;
 import driver.utilsSelectDriver.utilsSelectDriver;
+import io.appium.java_client.MobileElement;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,6 +44,24 @@ public class utilsWebElements {
             } else {
                 utilsSelectDriver.printMsg(msn);
             }
+        }
+    }
+
+    public void isDisplayOrEnable(WebElement elements, Boolean enableError) {
+        if (!enableError) {
+            try {
+                Assert.assertTrue(elements.isDisplayed());
+            } catch (Exception e) {
+                utilsSelectDriver.printMsg("WARNING -> is NOT Displayed the element " + elements);
+            }
+            try {
+                Assert.assertTrue(elements.isEnabled());
+            } catch (Exception e) {
+                utilsSelectDriver.printMsg("WARNING ->  is NOT Enabled the element " + elements);
+            }
+        } else {
+            Assert.assertTrue(elements.isDisplayed());
+            Assert.assertTrue(elements.isEnabled());
         }
     }
 

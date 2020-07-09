@@ -1,5 +1,6 @@
 package steps.web.google;
 
+import driver.typeDriver.appium.Appium;
 import driver.typeDriver.selenium.Selenium;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -14,10 +15,12 @@ public class googleSteps {
     @When("Se visualiza la pagina de busqueda de google")
     public void seVisualizaLaPaginaDeBusquedaDeGoogle() {
         paginaGoogle = new googlePage();
+        Selenium.utilsWebElements.isDisplayOrEnable(paginaGoogle.barra,true);
     }
 
     @When("Buscar en google por {string}")
     public void buscar_por(String string) {
+        paginaGoogle = new googlePage();
         paginaGoogle.barra.clear();
         paginaGoogle.barra.sendKeys(string);
         paginaGoogle.barra.submit();
@@ -35,16 +38,6 @@ public class googleSteps {
         googleResultPage googleResult = new googleResultPage();
         googleResult.resultFirst.click();
         Selenium.utilsDriver.sleep(3);
-    }
-
-    @Then("Comprobar que lleva a {string}")
-    public void comprobar_que_lleva_a_(String url) {
-        Selenium.utilsDriver.sleep(1);
-        String urlActual = Selenium.utilsDriver.getURLPage();
-        Selenium.utilsWebElements.assertEqualsText(urlActual, url, false);
-        Selenium.utilsDriver.sleep(1);
-        Selenium.utilsDriver.Scroll(400);
-        Selenium.utilsDriver.sleep(2);
     }
 
 }
