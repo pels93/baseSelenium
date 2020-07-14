@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -73,6 +74,19 @@ public class startSeleniumDriverBrowser {
                     driver = new EdgeDriver();
                 } catch (Exception e) {
                     WebDriverManager.edgedriver().forceDownload();
+                    utilsSelectDriver.printError(MsgError, e.toString());
+                }
+                break;
+            }
+            case Browsers.explorer: {
+                //https://stackoverflow.com/questions/14952348/not-able-to-launch-ie-browser-using-selenium2-webdriver-with-java
+                WebDriverManager.iedriver().cachePath(rutaCompleta);
+                WebDriverManager.iedriver().setup();
+                System.setProperty("webdriver.ie.driver", WebDriverManager.iedriver().getBinaryPath());
+                try {
+                    driver = new InternetExplorerDriver();
+                } catch (Exception e) {
+                    WebDriverManager.iedriver().forceDownload();
                     utilsSelectDriver.printError(MsgError, e.toString());
                 }
                 break;

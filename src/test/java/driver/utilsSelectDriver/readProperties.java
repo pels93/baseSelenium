@@ -89,6 +89,10 @@ public class readProperties {
                 auxreturn = Browsers.safari;
                 break;
             }
+            case "explorer": {
+                auxreturn = Browsers.explorer;
+                break;
+            }
             default: {
                 auxreturn = Browsers.chrome;
             }
