@@ -131,9 +131,23 @@ public class utilsSeleiumDriver {
                 .perform();
     }
 
-    public void Scroll(int posY)
-    {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,"+posY+")");
+    public void Scroll(int posY) {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + posY + ")");
+    }
+
+
+    public void dragAndDropElement(WebElement element, int posX, int posY) {
+        Actions actions = new Actions(driver);
+        actions.dragAndDropBy(element, posX, posY)
+                .release()
+                .perform();
+    }
+
+    public void dragAndDropElementToElement(WebElement element, WebElement elementFinal) {
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(element, elementFinal)
+                .release()
+                .perform();
     }
 
 }
