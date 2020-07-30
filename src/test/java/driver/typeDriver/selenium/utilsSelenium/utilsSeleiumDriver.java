@@ -104,16 +104,23 @@ public class utilsSeleiumDriver {
         */
     }
 
-    public void moveElementByPosition(WebElement elem) {
+    public void hoverElement(WebElement elem) {
         int width = elem.getSize().getWidth();
         Actions act = new Actions(driver);
-        act.moveToElement(elem).moveByOffset((width / 2) - 2, 0).click().release().perform();
+        act.moveToElement(elem).moveByOffset((width / 2) - 2, 0)
+                .click()
+                .release()
+                .perform();
     }
 
-    public void moveElementByPositionAndClick(WebElement elem) {
+    public void hoverAndClickElement(WebElement elem) {
         int width = elem.getSize().getWidth();
         Actions act = new Actions(driver);
-        act.moveToElement(elem).moveByOffset((width / 2) - 2, 0).click().release().perform();
+        act.moveToElement(elem)
+                .moveByOffset((width / 2) - 2, 0)
+                .click()
+                .release()
+                .perform();
     }
 
     public void clickLong(WebElement element) {
@@ -133,13 +140,6 @@ public class utilsSeleiumDriver {
     public void clickButtonRight(WebElement element) {
         Actions actions = new Actions(driver);
         actions.contextClick(element)
-                .release()
-                .perform();
-    }
-
-    public void clickDouble(WebElement element) {
-        Actions actions = new Actions(driver);
-        actions.doubleClick(element)
                 .release()
                 .perform();
     }
