@@ -104,8 +104,15 @@ Setting file  `RunCucumber.properties` from mobile
 	cucumber.report=--plugin json:reports/json/${cucumber.TypeTest}/report.json --plugin pretty --plugin summary
 	cumcumber.reportHTML=reports/html/${cucumber.TypeTest}/
 	cumcumber.reportJSON=reports/json/${cucumber.TypeTest}/
-     
-----
+    
+## use Internet explorer
+recommended use 32 bit because 64 bit is very slowly
+>setting 1 [Link](https://stackoverflow.com/questions/14952348/not-able-to-launch-ie-browser-using-selenium2-webdriver-with-java).
+
+>setting 2 [Link](https://stackoverflow.com/questions/59759426/selenium-performance-with-internetexplorerdriver-and-ie11)
+
+>download[Link](https://www.selenium.dev/downloads/)
+---
 ## Write Steps
 With **appium** you need declare in your page.class
     
