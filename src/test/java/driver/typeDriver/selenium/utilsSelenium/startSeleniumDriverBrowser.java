@@ -10,6 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class startSeleniumDriverBrowser {
@@ -80,11 +81,26 @@ public class startSeleniumDriverBrowser {
             }
             case Browsers.explorer: {
                 //https://stackoverflow.com/questions/14952348/not-able-to-launch-ie-browser-using-selenium2-webdriver-with-java
+                //https://stackoverflow.com/questions/59759426/selenium-performance-with-internetexplorerdriver-and-ie11
+                //https://www.selenium.dev/downloads/
                 WebDriverManager.iedriver().cachePath(rutaCompleta);
                 WebDriverManager.iedriver().setup();
                 System.setProperty("webdriver.ie.driver", WebDriverManager.iedriver().getBinaryPath());
+                DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+               /* ieCapabilities.setCapability("nativeEvents", true);
+                ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
+                ieCapabilities.setCapability("IntroduceInstabilityByIgnoringProtectedModeSettings", true);
+                ieCapabilities.setCapability("INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS", true);
+                ieCapabilities.setCapability("ignoreProtectedModeSettings", true);
+                ieCapabilities.setCapability("disable-popup-blocking", true);
+                ieCapabilities.setCapability("enablePersistentHover", true);
+                ieCapabilities.setCapability("EnsureCleanSession", true);
+                ieCapabilities.setCapability("RequireWindowFocus", true);
+                */
+                ieCapabilities.setCapability("ignoreZoomSetting", true);
+                ieCapabilities.setCapability("AcceptInsecureCertificates", true);
                 try {
-                    driver = new InternetExplorerDriver();
+                    driver = new InternetExplorerDriver(ieCapabilities);
                 } catch (Exception e) {
                     WebDriverManager.iedriver().forceDownload();
                     utilsSelectDriver.printError(MsgError, e.toString());
