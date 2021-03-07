@@ -1,10 +1,7 @@
 package steps.web.google;
 
-import driver.typeDriver.appium.Appium;
 import driver.typeDriver.selenium.Selenium;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import org.openqa.selenium.WebElement;
 import pages.web.google.googlePage;
 import pages.web.google.googleResultPage;
@@ -26,6 +23,8 @@ public class googleSteps {
                 Selenium.driver.switchTo().frame(enable_iframe.get(0));
                 Selenium.utilsWebElements.findElementByText("Acepto").click();
             }
+        Selenium.driver.switchTo().defaultContent();
+
     }
 
     @When("Buscar en google por {string}")
@@ -42,7 +41,6 @@ public class googleSteps {
         Selenium.utilsDriver.sleep(2);
         googleResultPage googleResult = new googleResultPage();
         googleResult.resultFirst.click();
-        Selenium.driver.switchTo().defaultContent();
         Selenium.utilsDriver.sleep(3);
     }
 
