@@ -97,7 +97,8 @@ public class utilsWebElements {
 
     public List<WebElement> findElementsByText(String text,int milliseconds) {
         Selenium.utilsDriver.waiter(milliseconds);
-        return driver.findElements(By.xpath("//*[contains(text(), 'My Button')]"));
+        return driver.findElements(By.xpath("//*[text()='" + text + "']"));
+        //return driver.findElements(By.xpath("//*[contains(text(), 'My Button')]"));
     }
 
     public WebElement findElementByHref(String href) {
