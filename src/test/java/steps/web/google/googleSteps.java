@@ -17,14 +17,7 @@ public class googleSteps {
         paginaGoogle = new googlePage();
         Selenium.utilsWebElements.isDisplayOrEnable(paginaGoogle.barra, true);
         Selenium.utilsDriver.sleep(5);
-        List<WebElement> enable_iframe = Selenium.utilsWebElements.findElementsByCssSelector("iframe", 5);
-            if (enable_iframe.size()>0)
-            {
-                Selenium.driver.switchTo().frame(enable_iframe.get(0));
-                Selenium.utilsWebElements.findElementByText("Acepto").click();
-            }
-        Selenium.driver.switchTo().defaultContent();
-
+        paginaGoogle.accept_cookies();
     }
 
     @When("Buscar en google por {string}")
