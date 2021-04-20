@@ -3,7 +3,6 @@ package driver.typeDriver.selenium.utilsSelenium;
 
 import driver.typeDriver.selenium.Selenium;
 import driver.utilsSelectDriver.utilsSelectDriver;
-import io.appium.java_client.MobileElement;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,17 +33,21 @@ public class utilsWebElements {
         }
     }
 
-    public void assertEqualsText(String textoEncotrado, String textoAEncontrar, boolean enableError) {
+    public Boolean assertEqualsText(String textoEncotrado, String textoAEncontrar, boolean enableError) {
+        Boolean result=false;
         try {
             Assert.assertEquals(textoEncotrado, textoAEncontrar);
+            result= true;
         } catch (AssertionError a) {
             String msn = "WARNING -> se esperaba \n" + textoAEncontrar + "\n y ha llegado \n" + textoEncotrado;
             if (enableError) {
+                result= true;
                 throw new AssertionError(msn);
             } else {
                 utilsSelectDriver.printMsg(msn);
             }
         }
+        return result;
     }
 
     public void isDisplayOrEnable(WebElement elements, Boolean enableError) {

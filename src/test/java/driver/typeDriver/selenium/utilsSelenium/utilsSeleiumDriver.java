@@ -148,6 +148,10 @@ public class utilsSeleiumDriver {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + posY + ")");
     }
 
+    public void scrollByElement(WebElement element)
+    {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
 
     public void dragAndDropElement(WebElement element, int posX, int posY) {
         Actions actions = new Actions(driver);

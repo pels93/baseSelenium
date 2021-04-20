@@ -11,11 +11,11 @@ Feature: Amazon
 
   @without
   Scenario: El navegador busca en amazon patatas
-    When Buscar por amazon patatas
+    When  Se visualiza la pagina de amazon
+    And   Buscar por amazon tornillos
     And  Seleccionar el primer resultado
     And  Se visualiza la pagina del producto
     And  Se add a la cesta
-    And  Si salta oferta se cierra
     Then El total de productos es uno
 
 

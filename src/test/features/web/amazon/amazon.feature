@@ -10,24 +10,23 @@ Feature: Amazon
 
   @web @amazon
   Scenario Outline: El navegador busca en amazon <productos>
-    When  Buscar en amazon <productos>
+    When   Se visualiza la pagina de amazon
+    And  Buscar en amazon <productos>
     And   Seleccionar el producto de la posicion "1"
     And   Se visualiza la pagina del producto
     And   Se add a la cesta
-    And   Si salta oferta se cierra
-    #And   El producto <productos> esta en la cesta de "amazon.es"
+    And   El total de productos es "1"
     And   Buscar en amazon <productos2>
     And   Seleccionar el producto de la posicion "1"
     And   Se visualiza la pagina del producto
     And   Se add a la cesta
-    #And   El producto <productos> esta en la cesta de "amazon.es"
     Then  El total de productos es "2"
 
 
+
     Examples:
-      | productos | productos2 |
-      | "patatas" | "ajo"      |
-    #  | "ajo"     | "patatas"  |
+      | productos        | productos2 |
+      | "destornillador" | "teclado"  |
     #  | "pintura" | "pintura"  |
 
 
