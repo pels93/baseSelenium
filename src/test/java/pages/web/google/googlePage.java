@@ -11,19 +11,21 @@ public class googlePage {
     public WebElement barra = Selenium.utilsWebElements.findElementByName("q");
 
 
-    public void accept_cookies()
-    {
+    public void accept_cookies() {
         List<WebElement> enable_iframe = Selenium.utilsWebElements.findElementsByCssSelector("iframe", 5);
-        if (enable_iframe.size()>0)
-        {
+        if (enable_iframe.size() > 0) {
             Selenium.driver.switchTo().frame(enable_iframe.get(0));
             Selenium.utilsWebElements.findElementByText("Acepto").click();
             Selenium.driver.switchTo().defaultContent();
         }
-        List<WebElement> aux_click =  Selenium.utilsWebElements.findElementsByText("Acepto",2000);
-        if (aux_click.size()>0)
-        {
-            aux_click.get(0).click();
+        List<WebElement> aux_click_text = Selenium.utilsWebElements.findElementsByText("Acepto", 5);
+        if (aux_click_text.size() > 0) {
+            aux_click_text.get(0).click();
+        } else {
+            List<WebElement> aux_click_css = Selenium.utilsWebElements.findElementsByCssSelector("button#zV9nZe", 5);
+            if (aux_click_css.size() > 0) {
+                aux_click_css.get(0).click();
+            }
         }
     }
 
