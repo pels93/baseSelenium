@@ -1,6 +1,7 @@
 package driver.typeDriver.selenium.utilsSelenium;
 
 import driver.typeDriver.selenium.Selenium;
+import driver.typeDriver.selenium.interfacesSelenium.Browsers;
 import driver.typeDriver.selenium.interfacesSelenium.WindowsSize;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.*;
@@ -11,9 +12,12 @@ import java.util.concurrent.TimeUnit;
 public class utilsSeleiumDriver {
 
     WebDriver driver;
+    int browser;
 
     public utilsSeleiumDriver() {
+
         this.driver = Selenium.driver;
+        this.browser = Selenium.browser;
     }
 
     public void setWindowsSize(int tipo, int ancho, int alto) {
@@ -123,6 +127,34 @@ public class utilsSeleiumDriver {
                 .perform();
     }
 
+    public boolean click(WebElement element) {
+
+        boolean result = true;
+        try {
+            try {
+                aux_click(element);
+            } catch (Exception e) {
+                scrollByElement(element);
+                sleep(3);
+                aux_click(element);
+            }
+        } catch (Exception e) {
+            result = false;
+        }
+        return result;
+    }
+
+    public void aux_click(WebElement element) {
+        if (browser == Browsers.explorer) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeAsyncScript("return document.body.scrollHeight");
+            js.executeAsyncScript("window.scrollTo(0, document.body.scrollHeight);");
+            js.executeAsyncScript("arguments[0].click();", element);
+        } else {
+            element.click();
+        }
+    }
+
     public void clickLong(WebElement element) {
         Actions actions = new Actions(driver);
         actions.clickAndHold(element)
@@ -148,8 +180,7 @@ public class utilsSeleiumDriver {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + posY + ")");
     }
 
-    public void scrollByElement(WebElement element)
-    {
+    public void scrollByElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
