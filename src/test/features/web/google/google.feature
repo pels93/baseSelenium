@@ -10,6 +10,6 @@ Feature: navegar por google
     Then  Comprobar que lleva a <sitioDestino>
 
     Examples:
-      | sitios          | url                 | sitioDestino             |
-      | "starfriend.es" | "https://google.es" | "https://starfriend.es/" |
-      | "marca.com"     | "https://google.es" | "https://www.marca.com/" |
+      | sitios           | url                 | sitioDestino              |
+      | "phptravels.com" | "https://google.es" | "https://phptravels.com/" |
+      | "marca.com"      | "https://google.es" | "https://www.marca.com/"  |
