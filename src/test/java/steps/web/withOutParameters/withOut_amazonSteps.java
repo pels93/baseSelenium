@@ -34,7 +34,7 @@ public class withOut_amazonSteps {
     @Then("El total de productos es uno")
     public void elTotalDeProductosEsUno() {
         Selenium.utilsDriver.sleep(3);
-        amazon.load_list();
-        Assert.assertEquals(amazon.productList.size(), 1);
+        amazon.load_count_products();
+        Assert.assertEquals(amazon.productList.getText(), 1);
     }
 }

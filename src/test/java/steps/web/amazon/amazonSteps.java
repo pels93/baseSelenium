@@ -55,8 +55,9 @@ public class amazonSteps {
     @Then("El total de productos es {string}")
     public void elTotalDeProductosEs(String cantidad) {
         Selenium.utilsDriver.sleep(3);
-        amazon.load_list();
-        Assert.assertEquals(Integer.parseInt(cantidad),amazon.productList.size());
+        amazon.load_count_products();
+        int count = Integer.parseInt(amazon.productList.getText());
+        Assert.assertEquals(Integer.parseInt(cantidad), count);
     }
 
 

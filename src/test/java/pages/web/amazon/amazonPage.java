@@ -18,7 +18,7 @@ public class amazonPage {
     public WebElement titleProduct;
     public WebElement addProdcuctCest;
     //Product list
-    public List<WebElement> productList;
+    public WebElement productList;
 
     // init
     public amazonPage() {
@@ -53,9 +53,8 @@ public class amazonPage {
     }
 
     //Product list
-    public void load_list() {
-        WebElement containerCesta = Selenium.utilsWebElements.findElementByCssSelector("div#ewc-content");
-        productList = containerCesta.findElements(By.cssSelector("img"));
+    public void load_count_products() {
+        productList = Selenium.utilsWebElements.findElementByXpath("//header//div[@class=\"nav-right\"]//span[@id=\"nav-cart-count\"]");
     }
 
 }
