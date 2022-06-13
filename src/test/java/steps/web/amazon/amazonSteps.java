@@ -56,7 +56,7 @@ public class amazonSteps {
     public void elTotalDeProductosEs(String cantidad) {
         Selenium.utilsDriver.sleep(3);
         amazon.load_list();
-        Assert.assertEquals(amazon.productList.size(), Integer.parseInt(cantidad));
+        Assert.assertEquals(Integer.parseInt(cantidad),amazon.productList.size());
     }
 
 
