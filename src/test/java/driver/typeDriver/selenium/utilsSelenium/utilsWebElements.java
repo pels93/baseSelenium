@@ -34,14 +34,14 @@ public class utilsWebElements {
     }
 
     public Boolean assertEqualsText(String textoEncotrado, String textoAEncontrar, boolean enableError) {
-        Boolean result=false;
+        Boolean result = false;
         try {
             Assert.assertEquals(textoEncotrado, textoAEncontrar);
-            result= true;
+            result = true;
         } catch (AssertionError a) {
             String msn = "WARNING -> se esperaba \n" + textoAEncontrar + "\n y ha llegado \n" + textoEncotrado;
             if (enableError) {
-                result= true;
+                result = true;
                 throw new AssertionError(msn);
             } else {
                 utilsSelectDriver.printMsg(msn);
@@ -98,10 +98,20 @@ public class utilsWebElements {
         //("//*[contains(text(), 'My Button')]")
     }
 
-    public List<WebElement> findElementsByText(String text,int milliseconds) {
+
+    public List<WebElement> findElementsByText(String text, int milliseconds) {
         Selenium.utilsDriver.waiter(milliseconds);
         return driver.findElements(By.xpath("//*[text()='" + text + "']"));
-        //return driver.findElements(By.xpath("//*[contains(text(), 'My Button')]"));
+    }
+
+    public WebElement findElementByXpath(String text) {
+        return driver.findElement(By.xpath(text));
+    }
+
+    public List<WebElement> findElementsByXpath(String text, int milliseconds) {
+        Selenium.utilsDriver.waiter(milliseconds);
+        return driver.findElements(By.xpath(text));
+
     }
 
     public WebElement findElementByHref(String href) {
