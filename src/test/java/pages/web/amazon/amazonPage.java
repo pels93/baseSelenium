@@ -52,6 +52,16 @@ public class amazonPage {
         addProdcuctCest = Selenium.utilsWebElements.findElementByCssSelector("input#add-to-cart-button.a-button-input");
     }
 
+    public void isVisibleWarranty() {
+        List<WebElement> garantia = Selenium.utilsWebElements.findElementsByXpath(
+                "//*[@id=\"attach-warranty-pane\"]//*[@id=\"attachSiNoCoverage\"]/span", 2000);
+        if (garantia.size() > 0) {
+            garantia.get(0).click();
+        }
+
+
+    }
+
     //Product list
     public void load_count_products() {
         productList = Selenium.utilsWebElements.findElementByXpath("//header//div[@class=\"nav-right\"]//span[@id=\"nav-cart-count\"]");

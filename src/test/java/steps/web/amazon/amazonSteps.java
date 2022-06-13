@@ -50,6 +50,7 @@ public class amazonSteps {
     public void seAddALaCesta() {
         amazon.addProdcuctCest.click();
         Selenium.utilsDriver.sleep(5);
+        amazon.isVisibleWarranty();
     }
 
     @Then("El total de productos es {string}")

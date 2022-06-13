@@ -9,7 +9,7 @@ Feature: Amazon
     And   Comprobar que lleva a "https://www.amazon.es/"
 
   @web @amazon
-  Scenario Outline: El navegador busca en amazon <productos>
+  Scenario Outline: El navegador busca en amazon <productos> & <productos2>
     When   Se visualiza la pagina de amazon
     And  Buscar en amazon <productos>
     And   Seleccionar el producto de la posicion "1"
@@ -25,9 +25,8 @@ Feature: Amazon
 
 
     Examples:
-      | productos        | productos2 |
-      | "destornillador" | "teclado"  |
-    #  | "pintura" | "pintura"  |
+      | productos         | productos2 |
+      | "mesita de noche" | "lampara"  |
 
 
 
