@@ -15,7 +15,7 @@ public class googlePage {
         List<WebElement> enable_iframe = Selenium.utilsWebElements.findElementsByCssSelector("iframe", 5);
         if (enable_iframe.size() > 0) {
             Selenium.driver.switchTo().frame(enable_iframe.get(0));
-            Selenium.utilsWebElements.findElementByText("Acepto").click();
+            Selenium.utilsWebElements.findElementByXpath("(//*/div/button)[4]").click();
             Selenium.driver.switchTo().defaultContent();
         }
         List<WebElement> aux_click_text = Selenium.utilsWebElements.findElementsByText("Acepto", 5);
