@@ -33,15 +33,14 @@ public class utilsWebElements {
         }
     }
 
-    public Boolean assertEqualsText(String textoEncotrado, String textoAEncontrar, boolean enableError) {
-        Boolean result = false;
+    public boolean assertEqualsText(String textoEncotrado, String textoAEncontrar, boolean enableError) {
+        boolean result = false;
         try {
             Assert.assertEquals(textoEncotrado, textoAEncontrar);
             result = true;
         } catch (AssertionError a) {
             String msn = "WARNING -> se esperaba \n" + textoAEncontrar + "\n y ha llegado \n" + textoEncotrado;
             if (enableError) {
-                result = true;
                 throw new AssertionError(msn);
             } else {
                 utilsSelectDriver.printMsg(msn);
@@ -89,19 +88,24 @@ public class utilsWebElements {
     }
 
     public List<WebElement> findElementsByCssSelector(String CssSelector, int milliseconds) {
-        Selenium.utilsDriver.waiter(5000);
+        Selenium.utilsDriver.waiter(milliseconds);
         return driver.findElements(By.cssSelector(CssSelector));
     }
 
     public WebElement findElementByText(String text) {
         return driver.findElement(By.xpath("//*[text()='" + text + "']"));
-        //("//*[contains(text(), 'My Button')]")
     }
-
 
     public List<WebElement> findElementsByText(String text, int milliseconds) {
         Selenium.utilsDriver.waiter(milliseconds);
         return driver.findElements(By.xpath("//*[text()='" + text + "']"));
+    }
+    public WebElement findElementByContainsText(String text) {
+        return driver.findElement(By.xpath("//*[contains(text(),'ABC')])"));
+    }
+    public List<WebElement> findElementsByContainsText(String text, int milliseconds) {
+        Selenium.utilsDriver.waiter(milliseconds);
+        return driver.findElements(By.xpath("//*[contains(text(),'ABC')])"));
     }
 
     public WebElement findElementByXpath(String text) {
