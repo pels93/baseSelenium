@@ -15,18 +15,16 @@ public class googlePage {
         List<WebElement> enable_iframe = Selenium.utilsWebElements.findElementsByCssSelector("iframe", 5);
         if (enable_iframe.size() > 0) {
             Selenium.driver.switchTo().frame(enable_iframe.get(0));
-            Selenium.utilsWebElements.findElementByXpath("(//*/div/button)[4]").click();
+            findButtonAccept();
             Selenium.driver.switchTo().defaultContent();
-        }
-        List<WebElement> aux_click_text = Selenium.utilsWebElements.findElementsByText("Acepto", 5);
-        if (aux_click_text.size() > 0) {
-            aux_click_text.get(0).click();
         } else {
-            List<WebElement> aux_click_css = Selenium.utilsWebElements.findElementsByCssSelector("button#zV9nZe", 5);
-            if (aux_click_css.size() > 0) {
-                aux_click_css.get(0).click();
-            }
+            findButtonAccept();
         }
     }
 
+    public void findButtonAccept() {
+        WebElement aceptar = Selenium.utilsWebElements.findElementByXpath("(//*/div/button)[4]/div");
+        Selenium.utilsDriver.scrollByElement(aceptar);
+        aceptar.click();
+    }
 }
